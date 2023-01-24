@@ -37,10 +37,14 @@ def count_true_results(wat, waar, IDin):
     my_connect.commit()
     sel = better_string(sel)
     return count;
+#invoeren van een resultaat op een gestelde vraag
+def insert_result(user_id, question_id , result): 
+    mycursor = mydb.cursor()
 
-def insert_database(wat , waar , IDin): 
-    my_conn.execute<(("INSERT " + wat +  " FROM " + " WHERE ID = %s "), (IDin,))
-    sel = my_conn.fetchone()
-    my_connect.commit()
-    sel = better_string(sel)
-    return sel;
+    sql = "INSERT INTO result (questions_id, users_id,result) VALUES (%s, %s)"
+    val = (user_id, question_id,result )
+    mycursor.execute(sql, val)
+
+    mydb.commit()
+
+
