@@ -4,6 +4,9 @@ from PIL import ImageTk, Image
 #import mysql.connector
 import re
 
+import os
+import subprocess
+
 #from database_gip import *
 
 #import pyglet
@@ -13,6 +16,10 @@ import re
 email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 studie_richting_opties = ["a", "b", "c"]
+
+def callback(event):
+    print("BIND")
+    
 
 
 class Pagina(Frame):
@@ -138,8 +145,8 @@ class GegevensPagina(Pagina):
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=25, width=150)
 
-        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", height=30, width=30, font=("",25))
-        contact_box.place(relx=0.5, rely=0.75, anchor=CENTER)
+        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", font=("",20))
+        contact_box.place(relx=0.5, rely=0.8, anchor=CENTER)
 
         #cntctbox.bind('<<ListBoxSelect>>', okbutton)
 
@@ -152,7 +159,7 @@ class GegevensPagina(Pagina):
             naam_ouder = ouder_entry.get()
             email_kind = email_kind_entry.get()
             email_ouder = email_ouders_entry.get()
-            contact_value = contact_box.get()
+            contact_value = contact_box.instate(['selected'])
 
             ##### check e-mail
 
