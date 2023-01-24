@@ -30,3 +30,10 @@ def select_database(wat, waar, IDin):
     my_connect.commit()
     sel = better_string(sel)
     return sel;
+
+def insert_database(wat , waar , IDin): 
+    my_conn.execute<(("INSERT " + wat +  " FROM " + " WHERE ID = %s "), (IDin,))
+    sel = my_conn.fetchone()
+    my_connect.commit()
+    sel = better_string(sel)
+    return sel;
