@@ -7,6 +7,8 @@ import re
 import os
 import subprocess
 
+from keyboard_new import KeyboardEntry
+
 #from database_gip import *
 
 #import pyglet
@@ -78,7 +80,7 @@ class GegevensPagina(Pagina):
         #voornaam
         naam_text = Label(self, text = "Voornaam:", fg="#1b709d", font=font)
         naam_text.place(relx=0.2, rely=oYLS, anchor=CENTER)
-        naam_entry = Entry (self, bd = 1, font=entry_font)
+        naam_entry = KeyboardEntry(self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         naam_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=height, width=150)
@@ -86,7 +88,7 @@ class GegevensPagina(Pagina):
         #achternaam
         achternaam_text = Label(self, text = "Achternaam:", fg="#1b709d", font=font)
         achternaam_text.place(relx=0.192, rely=oYLS + oY, anchor=CENTER)
-        achternaam_entry = Entry (self, bd = 1, font=entry_font)
+        achternaam_entry = KeyboardEntry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         achternaam_entry.place(relx=oXE, rely=oYES + oY , anchor=CENTER, height=height, width=150)
@@ -94,7 +96,7 @@ class GegevensPagina(Pagina):
         #leeftijd
         leeftijd_text = Label(self, text = "Leeftijd:", fg="#1b709d", font=font)
         leeftijd_text.place(relx=0.215, rely=oYLS + oY * 2, anchor=CENTER)
-        leeftijd_entry = Entry (self, bd = 1, font=entry_font)
+        leeftijd_entry = KeyboardEntry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         leeftijd_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=height, width=150)
@@ -102,7 +104,7 @@ class GegevensPagina(Pagina):
         #naam ouder/voogd
         ouder_text = Label(self, text = "Naam ouder/voogd:", fg="#1b709d", font=font)
         ouder_text.place(relx=0.156, rely=oYLS + oY * 3, anchor=CENTER)
-        ouder_entry = Entry (self, bd = 1, font=entry_font)
+        ouder_entry = KeyboardEntry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         ouder_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=height, width=150)
@@ -112,7 +114,7 @@ class GegevensPagina(Pagina):
         #email kind
         email_kind_text = Label(self, text = "E-mail kind:", fg="#1b709d", font=font)
         email_kind_text.place(relx=.59, rely=oYLS, anchor=CENTER)
-        email_kind_entry = Entry (self, bd = 1, font=entry_font)
+        email_kind_entry = KeyboardEntry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         email_kind_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=height, width=150)
@@ -132,7 +134,7 @@ class GegevensPagina(Pagina):
         #Telefoon
         tel_text = Label(self, text = "Telefoon:", fg="#1b709d", font=font)
         tel_text.place(relx=0.605, rely=oYLS + oY * 2, anchor=CENTER)
-        tel_entry = Entry (self, bd = 1, font=entry_font)
+        tel_entry = KeyboardEntry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         tel_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=height, width=150)
@@ -140,7 +142,7 @@ class GegevensPagina(Pagina):
         #Email ouders
         email_ouders_text = Label(self, text = "Email:", fg="#1b709d", font=font)
         email_ouders_text.place(relx=0.622, rely=oYLS + oY * 3, anchor=CENTER)
-        email_ouders_entry = Entry (self, bd = 1, font=font)
+        email_ouders_entry = KeyboardEntry (self, bd = 1, font=font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=height, width=150)

@@ -11,43 +11,33 @@ key = tk.Tk()  # key window name
 exp = " "          # global variable 
 # showing all data in display 
 
-def press(num):
-    global exp
-    exp=exp + str(num)
-    equation.set(exp)
-# end 
+class keyboard(object):
+    def __init__(self, entryobject):
+        self.entry = entryobject
+    
+    #
+    def press(self, num):
+        global exp
+        exp=exp + str(num)
+        self.entry.set(exp)
 
+    def backspace(self):
+        global exp
+        exp = exp[:-1]
+        self.entry.set(exp)
 
-# function clear button
+    def clear(self):
+        global exp
+        exp = " "
+        self.entry.set(exp)
 
-def clear():
-    global exp
-    exp = " "
-    equation.set(exp)
+    def enter():
+        exp = " Next Line : "
+        equation.set(exp)
 
-# end 
-
-
-# Enter Button Work Next line Function
-
-def action():
-  exp = " Next Line : "
-  equation.set(exp)
-
-# end function coding
-
-
-# Tab Button Function 
-
-
-def Tab():
-  exp = " TAB : "
-  equation.set(exp)
-
-# END Tab Button Fucntion
-
-
-
+    def tab():
+        exp = " TAB : "
+        equation.set(exp)
 
 
 # Size window size
@@ -135,7 +125,7 @@ K.grid(row = 2 , column = 7, ipadx = 6 , ipady = 10)
 L = ttk.Button(key,text = 'L' , width = 6, command = lambda : press('L'))
 L.grid(row = 2 , column = 8, ipadx = 6 , ipady = 10)
 
-enter = ttk.Button(key,text = 'Enter' , width = 6, command = action)
+enter = ttk.Button(key,text = 'Enter' , width = 6, command = enter)
 enter.grid(row = 2 , column = 13, ipadx = 10 , ipady = 10)
 
 # third line Button
