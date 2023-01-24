@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import os
-from PIL import *
 
 root = Tk()
 root.attributes('-fullscreen', True)
