@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`users` (
   `phone number` INT NOT NULL,
   `code` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE)
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC) )
 ENGINE = InnoDB;
 
 
