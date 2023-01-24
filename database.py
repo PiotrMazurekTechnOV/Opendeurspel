@@ -31,9 +31,18 @@ def select_database(wat, waar, IDin):
     sel = better_string(sel)
     return sel;
 
+<<<<<<< HEAD
 def count_true_results():
     query = "SELECT COUNT(wat) FROM waar WHERE result = true"
     my_conn.execute(query)
     count = my_conn.fetchone()
     my_connect.commit()
     return count;
+=======
+def insert_database(wat , waar , IDin): 
+    my_conn.execute<(("INSERT " + wat +  " FROM " + " WHERE ID = %s "), (IDin,))
+    sel = my_conn.fetchone()
+    my_connect.commit()
+    sel = better_string(sel)
+    return sel;
+>>>>>>> 5d8899c2f9ea6b450f74a74ae4a871c74f921396
