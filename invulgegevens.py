@@ -16,11 +16,7 @@ import subprocess
 email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 studie_richting_opties = ["a", "b", "c"]
-
-def callback(event):
-    print("BIND")
     
-
 
 class Pagina(Frame):
     def __init__(self, *args, **kwargs):
@@ -67,6 +63,10 @@ class GegevensPagina(Pagina):
         oXE = .32 #X entry offset
         oYES = 0.354 #Y entry start offset
 
+        font = ("Gilroy Light", 30)
+        entry_font = ("Gilroy Light", 20)
+        height = 25
+
         oY = .07 #Y entry offset
 
         oYLS = 0.35 #Y label start offset
@@ -76,76 +76,76 @@ class GegevensPagina(Pagina):
         oY += .025
 
         #voornaam
-        naam_text = Label(self, text = "Voornaam:", fg="#1b709d", font=("Gilroy Light", 20))
+        naam_text = Label(self, text = "Voornaam:", fg="#1b709d", font=font)
         naam_text.place(relx=0.2, rely=oYLS, anchor=CENTER)
-        naam_entry = Entry (self, bd = 1)
+        naam_entry = Entry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        naam_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=25, width=150)
+        naam_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=height, width=150)
 
         #achternaam
-        achternaam_text = Label(self, text = "Achternaam:", fg="#1b709d", font=("Gilroy Light", 20))
+        achternaam_text = Label(self, text = "Achternaam:", fg="#1b709d", font=font)
         achternaam_text.place(relx=0.192, rely=oYLS + oY, anchor=CENTER)
-        achternaam_entry = Entry (self, bd = 1)
+        achternaam_entry = Entry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        achternaam_entry.place(relx=oXE, rely=oYES + oY , anchor=CENTER, height=25, width=150)
+        achternaam_entry.place(relx=oXE, rely=oYES + oY , anchor=CENTER, height=height, width=150)
 
         #leeftijd
-        leeftijd_text = Label(self, text = "Leeftijd:", fg="#1b709d", font=("Gilroy Light", 20))
+        leeftijd_text = Label(self, text = "Leeftijd:", fg="#1b709d", font=font)
         leeftijd_text.place(relx=0.215, rely=oYLS + oY * 2, anchor=CENTER)
-        leeftijd_entry = Entry (self, bd = 1)
+        leeftijd_entry = Entry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        leeftijd_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=25, width=150)
+        leeftijd_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=height, width=150)
 
         #naam ouder/voogd
-        ouder_text = Label(self, text = "Naam ouder/voogd:", fg="#1b709d", font=("Gilroy Light", 20))
+        ouder_text = Label(self, text = "Naam ouder/voogd:", fg="#1b709d", font=font)
         ouder_text.place(relx=0.156, rely=oYLS + oY * 3, anchor=CENTER)
-        ouder_entry = Entry (self, bd = 1)
+        ouder_entry = Entry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        ouder_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=25, width=150)
+        ouder_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=height, width=150)
 
         oXE += .4
 
         #email kind
-        email_kind_text = Label(self, text = "E-mail kind:", fg="#1b709d", font=("Gilroy Light", 20))
+        email_kind_text = Label(self, text = "E-mail kind:", fg="#1b709d", font=font)
         email_kind_text.place(relx=.59, rely=oYLS, anchor=CENTER)
-        email_kind_entry = Entry (self, bd = 1)
+        email_kind_entry = Entry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        email_kind_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=25, width=150)
+        email_kind_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=height, width=150)
 
         studierighting = StringVar(self)
         studierighting.set("Selecteer studie richting") # default value
 
         #studierichting
-        studie_text = Label(self, text = "Studierichting:", fg="#1b709d", font=("Gilroy Light", 20))
+        studie_text = Label(self, text = "Studierichting:", fg="#1b709d", font=font)
         studie_text.place(relx=0.58, rely=oYLS + oY, anchor=CENTER)
         studie_entry = OptionMenu (self, studierighting, *studie_richting_opties)
-        studie_entry.configure(bd = 1, indicatoron=0)
+        studie_entry.configure(bd = 1, indicatoron=0, height=height)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        studie_entry.place(relx=oXE, rely=oYES + oY , anchor=CENTER, height=25, width=150)
+        studie_entry.place(relx=oXE, rely=oYES + oY , anchor=CENTER, height=height, width=150)
 
         #Telefoon
-        tel_text = Label(self, text = "Telefoon:", fg="#1b709d", font=("Gilroy Light", 20))
+        tel_text = Label(self, text = "Telefoon:", fg="#1b709d", font=font)
         tel_text.place(relx=0.605, rely=oYLS + oY * 2, anchor=CENTER)
-        tel_entry = Entry (self, bd = 1)
+        tel_entry = Entry (self, bd = 1, font=entry_font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        tel_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=25, width=150)
+        tel_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=height, width=150)
 
         #Email ouders
-        email_ouders_text = Label(self, text = "Email:", fg="#1b709d", font=("Gilroy Light", 20))
+        email_ouders_text = Label(self, text = "Email:", fg="#1b709d", font=font)
         email_ouders_text.place(relx=0.622, rely=oYLS + oY * 3, anchor=CENTER)
-        email_ouders_entry = Entry (self, bd = 1)
+        email_ouders_entry = Entry (self, bd = 1, font=font)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=25, width=150)
+        email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=height, width=150)
 
-        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", font=("",20))
+        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", font=font)
         contact_box.place(relx=0.5, rely=0.8, anchor=CENTER)
 
         #cntctbox.bind('<<ListBoxSelect>>', okbutton)
