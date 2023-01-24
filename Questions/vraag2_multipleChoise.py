@@ -1,9 +1,17 @@
 import tkinter as tk
 
+## Option_a_check is niet zichtbaar voor check en is dus niet bruikbaar op lijn 45-50 
+## Zie benden!
+
 # option_a_check = datbase
 # option_b_check = datbase
 # option_c_check = datbase
 # option_d_check = datbase
+
+global option_a_check
+global option_b_check
+global option_c_check
+global option_d_check
 
 class Quiz(tk.Tk):
     def __init__(self):
@@ -36,10 +44,12 @@ class Quiz(tk.Tk):
 
     def check_answer(self):
         selected_answers = {
+            ######################################################
             "a" if option_a_check.get() == 1 else "",
             "b" if option_b_check.get() == 1 else "",
             "c" if option_c_check.get() == 1 else "",
             "d" if option_d_check.get() == 1 else ""
+            ######################################################
         }
         if selected_answers == self.correct_answers:
             result_label = tk.Label(self, text="Correct!")
