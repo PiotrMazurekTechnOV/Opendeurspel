@@ -138,8 +138,9 @@ class GegevensPagina(Pagina):
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=25, width=150)
 
-        cntctbox = Listbox(self, listvariable = StringVar(value =("Ja","Nee")), height = 2, exportselection=False, bg="#502E93", fg="#F9DEE3", font=("Constantia",10),relief = GROOVE)
-        cntctbox = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?")
+        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", height=30, width=30, font=("",25))
+        contact_box.place(relx=0.5, rely=0.75, anchor=CENTER)
+
         #cntctbox.bind('<<ListBoxSelect>>', okbutton)
 
         def gegevens_ingevuld():
@@ -151,6 +152,7 @@ class GegevensPagina(Pagina):
             naam_ouder = ouder_entry.get()
             email_kind = email_kind_entry.get()
             email_ouder = email_ouders_entry.get()
+            contact_value = contact_box.get()
 
             ##### check e-mail
 
@@ -162,10 +164,9 @@ class GegevensPagina(Pagina):
                 #emailfout.place_forget()
 
                 #volgendebutton.place_forget()
-                cntctbox.place(relx=0.5, rely=0.75, anchor=CENTER)
             
                 #volgendebutton.place(relx=0.5, rely=0.9, anchor=CENTER)
-
+                pass
             else:
 
                 print("Invalid Email")
@@ -198,70 +199,6 @@ class MainView(Frame):
         p1.show()
 
 def new_window():
-
-    #voornaam
-    naam_invul = Label(root, text = "voornaam:"
-                    , fg="#1b709d", font=("Gilroy Light",15))
-    naam_invul.place(relx=0.25, rely=0.4, anchor=CENTER)
-    gegevens_naam = Entry (root, bd = 5)
-    gegevens_naam.place(relx=0.4, rely=0.4, anchor=CENTER)
-
-    #achternaam
-    acnaam_invul = Label(root, text = "naam:"
-                    , fg="#1b709d", font=("Gilroy",15))
-    acnaam_invul.place(relx=0.25, rely=0.5, anchor=CENTER)
-    gegevens_acnaam = Entry (root, bd = 5)
-    gegevens_acnaam.place(relx=0.4, rely=0.5, anchor=CENTER)
-
-    #leeftijd
-    leef_invul = Label(root, text = "leeftijd:", fg="#1b709d", font=("Gilroy",15))
-    leef_invul.place(relx=0.25, rely=0.6, anchor=CENTER)
-    gegevens_leef = Entry (root, bd = 5)
-    gegevens_leef.place(relx=0.4, rely=0.6, anchor=CENTER)
-
-    #naam ouders
-    oudnaam_invul = Label(root, text = "naam ouders:", fg="#1b709d", font=("Gilroy",15))
-    oudnaam_invul.place(relx=0.55, rely=0.6, anchor=CENTER)
-    gegevens_oudnaam = Entry (root, bd = 5)
-    gegevens_oudnaam.place(relx=0.7, rely=0.6, anchor=CENTER)
-
-    #e-mail ouders
-    oudadress_invul = Label(root, text = "e-mail adress ouders:", fg="#1b709d", font=("Gilroy",15))
-    oudadress_invul.place(relx=0.55, rely=0.5, anchor=CENTER)
-    gegevens_oudadress = Entry (root, bd = 5)
-    gegevens_oudadress.place(relx=0.7, rely=0.5, anchor=CENTER)
-
-    #studierichting
-    studie_invul = Label(root, text = "Welke studierichting inteseert u:"
-                        , fg="#1b709d", font=("Gilroy",15))
-    studie_invul.place(relx=0.55, rely=0.4, anchor=CENTER)
-    studiebox = Listbox(root,listvariable = StringVar(value =("STEM","STEM-wetenschappen","STEM-technieken"))
-                        ,height = 3, exportselection=False)
-    studiebox.place(relx=0.7, rely=0.4, anchor=CENTER)
-
-    #telefoon ouders
-    tel_invul = Label(root, text = "telefoon ouders:"
-                        , fg="#1b709d", font=("Gilroy Light",15))
-    tel_invul.place(relx=0.55, rely=0.7, anchor=CENTER)
-    gegevens_tel = Entry (root, bd = 5)
-    gegevens_tel.place(relx=0.7, rely=0.7, anchor=CENTER)
-
-    #e-mail
-    adress_invul = Label(root, text = "e-mail adress:"
-                        , fg="#1b709d", font=("GILROY LIGHT",15))
-    adress_invul.place(relx=0.25, rely=0.7, anchor=CENTER)
-    gegevens_adress = Entry (root, bd = 5)
-    gegevens_adress.place(relx=0.4, rely=0.7, anchor=CENTER)
-
-    #e-mail requerements
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
-    #connecteer met database
-    #my_conn = my_conn_database_gip()
-    #my_connect = my_connect_database_gip()
-
-    numm = ''
-        
     #klaarbutton
     def klbutton():
         global adressin, numm, eoudin
