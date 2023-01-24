@@ -18,6 +18,8 @@ antzin= ''
 IDin = 0
 punt = 0
 
+vraagnr = 0
+
 #loginbutton
 def lgnbutton():
     global naam, IDin, hallotekst
@@ -131,6 +133,5 @@ okbutton = Button(root, bg="#502E93", fg="#F9DEE3",relief = GROOVE
 #connecteer met database
 #my_conn = my_conn_database_gip()
 #my_connect = my_connect_database_gip()
-
 
 root.mainloop()
