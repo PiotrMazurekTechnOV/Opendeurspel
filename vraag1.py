@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import *
-import mysql.connector
 import os
-from database_gip import *
+#from database_gip import *
 
 root= Tk()
 root.attributes('-fullscreen', True)
@@ -11,6 +10,7 @@ bg = PhotoImage(file = "bg_vraag.png")
 
 imagelabel = Label(root, image = bg)
 imagelabel.place(x = 0, y = 0,relwidth = 1, relheight = 1)
+hallo = Label(root)
 
 vraagzin = ''
 naam = ''
@@ -23,23 +23,17 @@ def lgnbutton():
     global naam, IDin, hallotekst
     IDin = login.get()
 
-    mail = select_database("email", "users", IDin)
-    naam = select_database("naam", "users", IDin)
+    #mail = select_database("email", "users", IDin)
+    #naam = select_database("naam", "users", IDin)
     ##bestaat het nummer
-    if(mail == "None"):
-        hallo.configure(text = "ongeldig nummer"
-                            , bg="#DF3740", font=("Constantia",35),relief = GROOVE)
-        okbutton.configure(text='Ok',
-                            font=("Constantia",35))
-        okbutton.place(relx=0.8, rely=0.5, anchor=CENTER)
-    else:
+    
         #om hallo tegen de gebruiker te, gebruiker kan nu ook terug gaan
-        hallo.configure(text = f"hallo {naam} , \n Welkom bij de vraag"
-                    , bg="#FCF1AF", font=("Constantia",35),relief = GROOVE)
-        vraagbutton.place(relx=0.8, rely=0.5, anchor=CENTER)
-        okbutton.configure(text='Terug',
-                                   font=("Constantia",25))
-        okbutton.place(relx=0.5, rely=0.7, anchor=CENTER)
+    hallo.configure(text = f"hallo test , \n Welkom bij de vraag"
+                , bg="#FCF1AF", font=("Constantia",35),relief = GROOVE)
+    vraagbutton.place(relx=0.8, rely=0.5, anchor=CENTER)
+    okbutton.configure(text='Terug',
+                                font=("Constantia",25))
+    okbutton.place(relx=0.5, rely=0.7, anchor=CENTER)
     
     hallo.place(relx=0.5, rely=0.5, anchor=CENTER)
     
@@ -55,10 +49,11 @@ def vrgbutton():
     okbutton.place_forget()
 
     #checkt wat de vraag is
-    vraagzin = select_database("vraag", "questions", 1)
+    vraagzin = "test"
+    #select_database("vraag", "questions", 1)
 
     #checkt wat het antwoord is
-    my_conn.execute(("SELECT answertext FROM answer WHERE question_id = 1 "))
+    #my_conn.execute(("SELECT answertext FROM answer WHERE question_id = 1 "))
     antzin = better_string(my_conn.fetchone())
     my_connect.commit()
 
@@ -95,9 +90,8 @@ def klbutton():
 
     okbutton.place(relx=0.5, rely=0.5, anchor=CENTER)
     
-    my_conn.execute(("INSERT INTO results (user_id, question_id, result) VALUES(%s, 1 ,result + %s)")
-                    ,(IDin, punt))
-    my_connect.commit()
+    #my_conn.execute(("INSERT INTO results (user_id, question_id, result) VALUES(%s, 1 ,result + %s)"),(IDin, punt))
+    #my_connect.commit()
 
 def okbutton():
     hallo.place_forget()
@@ -135,8 +129,8 @@ okbutton = Button(root, bg="#502E93", fg="#F9DEE3",relief = GROOVE
                   , command=okbutton)
 
 #connecteer met database
-my_conn = my_conn_database_gip()
-my_connect = my_connect_database_gip()
+#my_conn = my_conn_database_gip()
+#my_connect = my_connect_database_gip()
 
 
 root.mainloop()
