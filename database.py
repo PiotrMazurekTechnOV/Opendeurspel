@@ -30,3 +30,10 @@ def select_database(wat, waar, IDin):
     my_connect.commit()
     sel = better_string(sel)
     return sel;
+
+def count_true_results():
+    query = "SELECT COUNT(wat) FROM waar WHERE result = true"
+    my_conn.execute(query)
+    count = my_conn.fetchone()
+    my_connect.commit()
+    return count;
