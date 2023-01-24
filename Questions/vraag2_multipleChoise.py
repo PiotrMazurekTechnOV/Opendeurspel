@@ -22,7 +22,7 @@ class Quiz(tk.Tk):
         self.option_c.set("Blue")
         self.option_d = tk.StringVar()
         self.option_d.set("Green")
-        self.correct_answers = {"a", "b","nc","nd",None}
+        self.correct_answers = {"a", "b","c","nd",None}
         self.create_widgets()
 
     def create_widgets(self):
@@ -66,11 +66,13 @@ class Quiz(tk.Tk):
             print("")
             print(selected_answers)
             print(self.correct_answers)
+            print("---")
         else:
             result_label = tk.Label(self, text="Incorrect!")
             print("")
             print(selected_answers)
             print(self.correct_answers)
+            print("---")
         selected_answers.clear()
         result_label.pack()
 
