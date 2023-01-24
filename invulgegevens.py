@@ -6,10 +6,13 @@ import re
 
 #from database_gip import *
 
-import pyglet
+#import pyglet
 #pyglet.font.add_file('Gilroy-Light.otf')
 
+#e-mail requirements
+email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
+studie_richting_opties = ["a", "b", "c"]
 
 
 class Pagina(Frame):
@@ -100,40 +103,76 @@ class GegevensPagina(Pagina):
         oXE += .4
 
         #email kind
-        email_text = Label(self, text = "E-mail kind:", fg="#1b709d", font=("Gilroy Light", 20))
-        email_text.place(relx=.59, rely=oYLS, anchor=CENTER)
-        email_entry = Entry (self, bd = 1)
+        email_kind_text = Label(self, text = "E-mail kind:", fg="#1b709d", font=("Gilroy Light", 20))
+        email_kind_text.place(relx=.59, rely=oYLS, anchor=CENTER)
+        email_kind_entry = Entry (self, bd = 1)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        email_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=25, width=150)
+        email_kind_entry.place(relx=oXE, rely=oYES, anchor=CENTER, height=25, width=150)
 
-        studierighting_value = StringVar(self)
-        studierighting_value.set("Selecteer studie richting") # default value
+        studierighting = StringVar(self)
+        studierighting.set("Selecteer studie richting") # default value
 
         #studierichting
         studie_text = Label(self, text = "Studierichting:", fg="#1b709d", font=("Gilroy Light", 20))
         studie_text.place(relx=0.58, rely=oYLS + oY, anchor=CENTER)
-        studie_entry = OptionMenu (self, studierighting_value, "one", "two", "three")
+        studie_entry = OptionMenu (self, studierighting, *studie_richting_opties)
         studie_entry.configure(bd = 1, indicatoron=0)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         studie_entry.place(relx=oXE, rely=oYES + oY , anchor=CENTER, height=25, width=150)
 
-        #leeftijd
-        naam_invul = Label(self, text = "Telefoon:", fg="#1b709d", font=("Gilroy Light", 20))
-        naam_invul.place(relx=0.605, rely=oYLS + oY * 2, anchor=CENTER)
-        gegevens_naam = Entry (self, bd = 1)
+        #Telefoon
+        tel_text = Label(self, text = "Telefoon:", fg="#1b709d", font=("Gilroy Light", 20))
+        tel_text.place(relx=0.605, rely=oYLS + oY * 2, anchor=CENTER)
+        tel_entry = Entry (self, bd = 1)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        gegevens_naam.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=25, width=150)
+        tel_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=25, width=150)
 
         #Email ouders
-        naam_invul = Label(self, text = "Email:", fg="#1b709d", font=("Gilroy Light", 20))
-        naam_invul.place(relx=0.622, rely=oYLS + oY * 3, anchor=CENTER)
-        gegevens_naam = Entry (self, bd = 1)
+        email_ouders_text = Label(self, text = "Email:", fg="#1b709d", font=("Gilroy Light", 20))
+        email_ouders_text.place(relx=0.622, rely=oYLS + oY * 3, anchor=CENTER)
+        email_ouders_entry = Entry (self, bd = 1)
         #gegevens_naam.insert(0, "Voornaam")
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
-        gegevens_naam.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=25, width=150)
+        email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=25, width=150)
+
+        cntctbox = Listbox(self, listvariable = StringVar(value =("Ja","Nee")), height = 2, exportselection=False, bg="#502E93", fg="#F9DEE3", font=("Constantia",10),relief = GROOVE)
+        cntctbox = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?")
+        #cntctbox.bind('<<ListBoxSelect>>', okbutton)
+
+        def gegevens_ingevuld():
+            global adressin, numm, eoudin
+            naam = naam_entry.get()
+            achternaam = achternaam_entry.get()
+            leeftijd = leeftijd_entry.get()
+            telefoonnummer = tel_entry.get()
+            naam_ouder = ouder_entry.get()
+            email_kind = email_kind_entry.get()
+            email_ouder = email_ouders_entry.get()
+
+            ##### check e-mail
+
+            if(True): #(re.fullmatch(email_regex, email_kind))and(re.fullmatch(email_regex, email_ouder)) and leeftijd.isnumeric() and telefoonnummer.isnumeric():
+
+                ##SEND TO DATABASE
+
+                #klaarbutton.place_forget()
+                #emailfout.place_forget()
+
+                #volgendebutton.place_forget()
+                cntctbox.place(relx=0.5, rely=0.75, anchor=CENTER)
+            
+                #volgendebutton.place(relx=0.5, rely=0.9, anchor=CENTER)
+
+            else:
+
+                print("Invalid Email")
+                emailfout.place(relx=0.5, rely=0.9, anchor=CENTER)
+
+        klaar = Button(self, text=" Klaar! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=gegevens_ingevuld, activeforeground="#FFFFFF", activebackground="#1b709d")        
+        klaar.place(relx=.5 ,rely=0.875, relwidth=.1, anchor=CENTER) 
         
 
 class MainView(Frame):
@@ -150,10 +189,10 @@ class MainView(Frame):
         p1.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
         p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)        
 
-        b1 = Button(p2, text="Klaar!", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=p1.lift, activeforeground="#FFFFFF", activebackground="#1b709d")
+        #b1 = Button(p2, text="Klaar!", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=p1.lift, activeforeground="#FFFFFF", activebackground="#1b709d")
         b2 = Button(p1, text=" Start! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=p2.lift, activeforeground="#FFFFFF", activebackground="#1b709d")        
 
-        b1.place(relx=.5 ,rely=0.875, relwidth=.1, anchor=CENTER) 
+        #b1.place(relx=.5 ,rely=0.875, relwidth=.1, anchor=CENTER) 
         b2.place(relx=.5 ,rely=0.875, relwidth=.1, anchor=CENTER) 
 
         p1.show()
@@ -333,21 +372,14 @@ def new_window():
         nummer.place_forget()
         klaarbutton.place(relx=0.5, rely=0.7, anchor=CENTER)
 
-    klaarbutton = Button(root, text='klaar', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE 
-                        , command=klbutton)
+    klaarbutton = Button(root, text='klaar', bg="#502E93", fg="#F9DEE3", font=("Constantia", 15), relief = GROOVE , command=klbutton)
     klaarbutton.place(relx=0.5, rely=0.8, anchor=CENTER)
-    volgendebutton = Button(root, text='volgende', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE
-                            , command=vlgndbutton)
-    emailfout = Label(root, text = "foute e-mail"
-                    , bg="#DF3740", font=("Constantia",15),relief = GROOVE)
+    volgendebutton = Button(root, text='volgende', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE, command=vlgndbutton)
+    emailfout = Label(root, text = "foute e-mail", bg="#DF3740", font=("Constantia",15),relief = GROOVE)
 
-    okbutton = Button(root, text='Ok', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE
-                    , command=okbutton)
-    finbutton = Button(root, text='Fin', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE
-                    , command=finbutton)
-    cntctbox = Listbox(root,listvariable = StringVar(value =("Ja","Nee"))
-                        ,height = 2, exportselection=False
-                    ,bg="#502E93", fg="#F9DEE3", font=("Constantia",10),relief = GROOVE)
+    okbutton = Button(root, text='Ok', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE, command=okbutton)
+    finbutton = Button(root, text='Fin', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE, command=finbutton)
+    cntctbox = Listbox(root,listvariable = StringVar(value =("Ja","Nee")), height = 2, exportselection=False, bg="#502E93", fg="#F9DEE3", font=("Constantia",10),relief = GROOVE)
     cntctbox.bind('<<ListBoxSelect>>', okbutton)
     nummer = Label(root)
 
