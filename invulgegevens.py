@@ -7,7 +7,7 @@ import re
 #from database_gip import *
 
 import pyglet
-pyglet.font.add_file('Gilroy-Light.otf')
+#pyglet.font.add_file('Gilroy-Light.otf')
 
 
 
@@ -109,7 +109,6 @@ class GegevensPagina(Pagina):
 
         studierighting_value = StringVar(self)
         studierighting_value.set("Selecteer studie richting") # default value
-        self.img = ImageTk.PhotoImage(Image.open("pijl.png"))
 
         #studierichting
         studie_text = Label(self, text = "Studierichting:", fg="#1b709d", font=("Gilroy Light", 20))
@@ -176,22 +175,19 @@ def new_window():
     gegevens_acnaam.place(relx=0.4, rely=0.5, anchor=CENTER)
 
     #leeftijd
-    leef_invul = Label(root, text = "leeftijd:"
-                    , fg="#1b709d", font=("Gilroy",15))
+    leef_invul = Label(root, text = "leeftijd:", fg="#1b709d", font=("Gilroy",15))
     leef_invul.place(relx=0.25, rely=0.6, anchor=CENTER)
     gegevens_leef = Entry (root, bd = 5)
     gegevens_leef.place(relx=0.4, rely=0.6, anchor=CENTER)
 
     #naam ouders
-    oudnaam_invul = Label(root, text = "naam ouders:"
-                    , fg="#1b709d", font=("Gilroy",15))
+    oudnaam_invul = Label(root, text = "naam ouders:", fg="#1b709d", font=("Gilroy",15))
     oudnaam_invul.place(relx=0.55, rely=0.6, anchor=CENTER)
     gegevens_oudnaam = Entry (root, bd = 5)
     gegevens_oudnaam.place(relx=0.7, rely=0.6, anchor=CENTER)
 
     #e-mail ouders
-    oudadress_invul = Label(root, text = "e-mail adress ouders:"
-                        , fg="#1b709d", font=("Gilroy",15))
+    oudadress_invul = Label(root, text = "e-mail adress ouders:", fg="#1b709d", font=("Gilroy",15))
     oudadress_invul.place(relx=0.55, rely=0.5, anchor=CENTER)
     gegevens_oudadress = Entry (root, bd = 5)
     gegevens_oudadress.place(relx=0.7, rely=0.5, anchor=CENTER)
