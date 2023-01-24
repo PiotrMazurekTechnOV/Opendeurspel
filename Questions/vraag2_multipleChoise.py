@@ -22,7 +22,7 @@ class Quiz(tk.Tk):
         self.option_c.set("Blue")
         self.option_d = tk.StringVar()
         self.option_d.set("Green")
-        self.correct_answers = {"a", "b","nc","nd",None}
+        self.correct_answers = {"a", "b","c","nd",None}
         self.create_widgets()
 
     def create_widgets(self):
