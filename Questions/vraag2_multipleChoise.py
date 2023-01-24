@@ -1,5 +1,10 @@
 import tkinter as tk
 
+# option_a_check = datbase
+# option_b_check = datbase
+# option_c_check = datbase
+# option_d_check = datbase
+
 class Quiz(tk.Tk):
     def __init__(self):
         super().__init__()
