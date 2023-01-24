@@ -12,14 +12,6 @@ imagelabel.place(x = 0, y = 0,relwidth = 1, relheight = 1)
 hallo = Label(root)
 
 
-
-
-
-
-
-
-
-
 class Quiz(tk.Tk):
     def __init__(self):
         super().__init__()

@@ -17,7 +17,6 @@ naam = ''
 antzin= ''
 IDin = 0
 punt = 0
-
 vraagnr = 0
 
 #loginbutton
