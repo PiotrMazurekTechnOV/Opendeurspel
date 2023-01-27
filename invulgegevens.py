@@ -32,20 +32,15 @@ class HomePagina(Pagina):
 
         #titel
         welkom = Label(self, text = "Welkom op de opendeurdag van Technov!"
-               , fg="#1b709d", font=("Gilroy Light",36))
-        welkom.place(relx=0.5, rely=0.05, anchor=N)
+               , fg="#1b709d", font=("Gilroy Light", 50))
+        welkom.place(relx=0.5, rely=0.1, anchor=N)
 
         #uitleg
-        uitleg = Label(self, text = """Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-recusandae alias error harum maxime adipisci amet laborum. Perspiciatis""", fg="#1b709d", font=("gilroy light",24))
+        uitleg = Label(self, text = """Dit is het opendeurspel gemaakt door Industriele ICT.
+        Tijdens u traject op onze school zal u vragen kunnen invullen met jou ID dat u krijgt op de volgende pagina. 
+        Als u hieronder op START! drukt, gaat u naar de registratiepagina waar u uw persoonlijk quiz ID ontvangt!
+        Op het einde van je rondleiding zal u uw score kunnen afdrukken als een 'diploma'!
+        Veel plezier!""", fg="#1b709d", font=("gilroy light",30))
         uitleg.place(relx=0.5, rely=0.2, anchor=N)
 
 class GegevensPagina(Pagina):
@@ -340,6 +335,6 @@ if __name__ == "__main__":
     main = MainView(root)
     main.pack(side="top", fill="both", expand=True)
     root.wm_geometry("400x400")
-    root.iconbitmap('kovlogo.ico')
+    #root.iconbitmap('kovlogo.ico')
     root.attributes('-fullscreen', True)
     root.mainloop()

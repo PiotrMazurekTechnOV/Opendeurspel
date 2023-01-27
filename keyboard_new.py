@@ -50,7 +50,7 @@ class _PopupKeyboard(Toplevel):
             'row1' : ['a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
             'row2' : ['<<<','q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l','m','>>>'],
             'row3' : ['shift','w', 'x', 'c', 'v', 'b', 'n','.','[1,2,3]'],
-            'row4' : ['@','[ space ]']
+            'row4' : ['@','[ space ]', '<-']
             }
         
         for row in self.alpha: # iterate over dictionary of rows
@@ -108,6 +108,8 @@ class _PopupKeyboard(Toplevel):
         elif k == '<<<':
             self.attach.tk_focusPrev().focus_set()
             self.destroy()
+        elif k == '<-':
+            self.attach.delete(len(self.attach.get())-1, END)
         elif k == '[1,2,3]':
             pass
         elif k == '[ space ]':
