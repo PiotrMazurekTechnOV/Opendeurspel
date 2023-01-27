@@ -36,12 +36,12 @@ class HomePagina(Pagina):
         welkom.place(relx=0.5, rely=0.1, anchor=N)
 
         #uitleg
-        uitleg = Label(self, text = """Dit is het opendeurspel gemaakt door Industriele ICT.
-        Tijdens u traject op onze school zal u vragen kunnen invullen met jou ID dat u krijgt op de volgende pagina. 
-        Als u hieronder op START! drukt, gaat u naar de registratiepagina waar u uw persoonlijk quiz ID ontvangt!
+        uitleg = Label(self, text = """Dit is het opendeurspel gemaakt door de leerlingen Industriele ICT.
+        Tijdens u traject op onze school zal u vragen kunnen invullen met uw ID.
+        Als u hieronder op Start! drukt, gaat u naar de registratiepagina waar u uw persoonlijk quiz ID ontvangt!
         Op het einde van je rondleiding zal u uw score kunnen afdrukken als een 'diploma'!
         Veel plezier!""", fg="#1b709d", font=("gilroy light",30))
-        uitleg.place(relx=0.5, rely=0.2, anchor=N)
+        uitleg.place(relx=0.5, rely=0.3, anchor=N)
 
 class GegevensPagina(Pagina):
    def __init__(self, *args, **kwargs):
