@@ -32,16 +32,17 @@ class HomePagina(Pagina):
 
         #titel
         welkom = Label(self, text = "Welkom op de opendeurdag van Technov!"
-               , fg="#1b709d", font=("Gilroy Light", 50))
+               , fg="#1b709d", font=("Gilroy Light", 65))
         welkom.place(relx=0.5, rely=0.1, anchor=N)
 
         #uitleg
         uitleg = Label(self, text = """Dit is het opendeurspel gemaakt door de leerlingen Industriele ICT.
-        Tijdens u traject op onze school zal u vragen kunnen invullen met uw ID.
-        Als u hieronder op Start! drukt, gaat u naar de registratiepagina waar u uw persoonlijk quiz ID ontvangt!
-        Op het einde van je rondleiding zal u uw score kunnen afdrukken als een 'diploma'!
-        Veel plezier!""", fg="#1b709d", font=("gilroy light",30))
-        uitleg.place(relx=0.5, rely=0.3, anchor=N)
+Tijdens u traject op onze school zal u vragen kunnen invullen met uw ID.
+Als u hieronder op Start! duwt.
+Gaat u naar de registratiepagina waar u uw persoonlijk quiz ID ontvangt!
+Op het einde van je rondleiding zal u uw score kunnen afdrukken als een 'diploma'!
+Veel plezier!""", fg="#1b709d", font=("gilroy light",35), pady=50)
+        uitleg.place(relx=0.5, rely=0.25, anchor=N)
 
 class GegevensPagina(Pagina):
    def __init__(self, *args, **kwargs):
@@ -195,10 +196,10 @@ class MainView(Frame):
         p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)        
 
         #b1 = Button(p2, text="Klaar!", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=p1.lift, activeforeground="#FFFFFF", activebackground="#1b709d")
-        b2 = Button(p1, text=" Start! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=p2.lift, activeforeground="#FFFFFF", activebackground="#1b709d")        
+        b2 = Button(p1, text=" Start! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 30), relief= FLAT , command=p2.lift, activeforeground="#FFFFFF", activebackground="#1b709d")        
 
         #b1.place(relx=.5 ,rely=0.875, relwidth=.1, anchor=CENTER) 
-        b2.place(relx=.5 ,rely=0.875, relwidth=.1, anchor=CENTER) 
+        b2.place(relx=.5 ,rely=0.875, relwidth=.15, anchor=CENTER) 
 
         p1.show()
 
