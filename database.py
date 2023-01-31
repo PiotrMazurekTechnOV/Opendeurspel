@@ -32,7 +32,7 @@ def better_string(string):
 
 def select_users(data , code):
     remote_connect.execute(("SELECT " + data+ " FROM  users WHERE code = %s"), (code,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -40,7 +40,7 @@ def select_users(data , code):
     return sel;
 def select_answer(data, IDin):
     remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -48,7 +48,7 @@ def select_answer(data, IDin):
     return sel;
 def select_question_text(clas):
     my_conn.execute(("SELECT question FROM questions WHERE ID = %s"), (clas,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -56,7 +56,7 @@ def select_question_text(clas):
     return sel
 def select_question_type(clas):
     my_conn.execute(("SELECT multy FROM questions WHERE ID = %s"), (clas,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -68,7 +68,7 @@ def select_questions():
 
 def select_results(data,IDin):
     my_conn.execute(("SELECT " + data + " FROM results WHERE clas = %s"), (IDin,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -135,7 +135,7 @@ def update_questions(question,multy,clas):
         remote_connect.rollback()
     sql = '''SELECT * from questions'''
     my_conn.execute(sql)
-    print(remote_connect.fetchall())
+    print(my_conn.fetchall())
     my_conn.close()
     remote_connect.close()
 def insert_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
@@ -161,7 +161,7 @@ def update_users(name,last_name,email_address,email_child,age_child,direction,co
         remote_connect.rollback()
     sql = '''SELECT * from user'''
     my_conn.execute(sql)
-    print(remote_connect.fetchall())
+    print(my_conn.fetchall())
     my_conn.close()
     remote_connect.close()
 
