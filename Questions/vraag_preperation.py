@@ -5,6 +5,26 @@ from tkinter import *
 
 vraagKeuze = 1
 
+main = Tk()
+
+width = 600
+height = 600
+
+def submit():  # Callback function for SUBMIT Button
+    klas = textbox.get("1.0", END)  # For line 1, col 0 to end.
+    print(klas)
+
+c = Canvas(main, width=width, height=height, highlightthickness=0)
+c.pack()
+
+textbox = Text(c, width=30, height=1)
+textbox.pack()
+
+submitbutton = Button(c, width=10, height=1, text='SUBMIT', command=submit)
+submitbutton.pack()
+
+mainloop()
+
 if vraagKeuze == 0:
     print("0")
     vraag1_openVraag.SetUp()
