@@ -42,6 +42,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`questions` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `question` TEXT(45) NOT NULL,
+  `multy` INT(45) NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
@@ -65,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`answers` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `answer` TEXT(50) NOT NULL,
   `questions_id` INT NOT NULL,
-  `multy` TINYINT NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
