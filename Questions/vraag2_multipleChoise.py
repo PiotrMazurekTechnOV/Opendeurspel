@@ -1,5 +1,4 @@
 import tkinter as tk
-import database
 
 ## Option_a_check is niet zichtbaar voor check en is dus niet bruikbaar op lijn 45-50 
 ## Zie benden!
@@ -9,17 +8,13 @@ import database
 # option_c_check = datbase
 # option_d_check = datbase
 
-answersDB = "a,b,c,nd" #data uit database
-
-def SetUp(klas):
-
+def SetUp(vraag, resultaten, antwoorden):    
     class Quiz(tk.Tk):
         def __init__(self):
             super().__init__()
             self.title("Quiz")
             self.question = tk.StringVar()
-            database.select_question_text(klas)
-            self.question.set(database.select_question_text(klas))
+            self.question.set(vraag)
             self.option_a = tk.StringVar()
             self.option_a.set("Red")
             self.option_b = tk.StringVar()
@@ -29,7 +24,7 @@ def SetUp(klas):
             self.option_d = tk.StringVar()
             self.option_d.set("Green")
             
-            self.correct_answers = answersDB.split(separator=",")
+            self.correct_answers = resultaten.split(separator=",")
             self.correct_answers.append(None)
             #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
             self.create_widgets()
