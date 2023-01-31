@@ -36,7 +36,7 @@ def select_users(data , IDin):
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
-def select_answer(data, kolom, IDin):
+def select_answer(data, IDin):
     remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
@@ -54,8 +54,8 @@ def select_results(data, IDin):
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
-def count_true_results(tabel, kolom, IDin):
-    remote_connect.execute(("SELECT COUNT(" +tabel + ") FROM " +kolom +"WHERE result = true,ID= %s"),(IDin,))
+def count_true_results( IDin):
+    remote_connect.execute(("SELECT COUNT( result ) FROM result WHERE result = true,ID= %s"),(IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
@@ -100,16 +100,16 @@ def update_questions(question,multy,clas):
     remote_connect.execute(sql)
     print(remote_connect.fetchall())
     remote_connect.close()
-def insert_users(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
+def insert_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
 
 
 
-    sql = "INSERT INTO user (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    val = (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code)
+    sql = "INSERT INTO user (name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    val = (name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code)
     remote_connect.execute(sql, val)
 
-def update_users(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
-    sql = 'UPDATE  user SET name = ' + name + ', last_name = ' + last_name + ', email_adres= ' + email_adres + 'email_kind ='+email_kind+'age_child = '+age_child+ 'direction='+direction+'contact ='+contact+'phone_number ='+phone_number+ 'code ='+code+ ''
+def update_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
+    sql = 'UPDATE  user SET name = ' + name + ', last_name = ' + last_name + ', email_address= ' + email_address + 'email_child ='+email_child+'age_child = '+age_child+ 'direction='+direction+'contact ='+contact+'phone_number ='+phone_number+ 'code ='+code+ ''
     try:
         # Execute the SQL command
         remote_connect.execute(sql)
