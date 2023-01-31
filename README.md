@@ -41,6 +41,4 @@ Queries:
 
     => In de tabel "user", elke variabele veranderen met de variabele die hij heeft gekregen.
 
-    8) 
-
 
