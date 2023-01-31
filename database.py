@@ -8,7 +8,7 @@ my_connect = mysql.connector.connect(
   passwd="",
   database="database_opendeurdag",)
 
- remote_connect = mysql.connector.connect(
+remote_connect = mysql.connector.connect(
   host="192.168.125.2",
   user= "opendeur",
   passwd="opendeur",
@@ -62,4 +62,4 @@ def insert_question(user_id, question_id , result):
     mydb.commit()
 
 
-select_database('*', 'users', 1);
+print(select_database('*', 'users', 1)
