@@ -30,15 +30,15 @@ def better_string(string):
     '[', '').replace(']', '')
   return string;
 
-def select_database(wat, waar, IDin):
-    remote_connect.execute(("SELECT " + wat + " FROM " + waar + " WHERE ID = %s"), (IDin,))
+def select_Culumn_out_of_database(tabel, kolom, IDin):
+    remote_connect.execute(("SELECT " + tabel + " FROM " + kolom + " WHERE ID = %s"), (IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
 
-def count_true_results(wat, waar, IDin):
-    my_conn.execute(("SELECT COUNT(" +wat + ") FROM " +waar +"WHERE result = true,ID= %s"),(IDin,))
+def count_true_results(tabel, kolom, IDin):
+    my_conn.execute(("SELECT COUNT(" +tabel + ") FROM " +kolom +"WHERE result = true,ID= %s"),(IDin,))
     sel = remote_connect.fetchone()
     my_connect.commit()
     sel = better_string(sel)
@@ -47,16 +47,16 @@ def count_true_results(wat, waar, IDin):
 def insert_result(user_id, question_id , result):
 
 
-    sql = "INSERT INTO result (questions_id, users_id,result) VALUES (%s, %s)"
+    sql = "INSERT INTO result (questions_id, users_id,result) VALUES (%s, %s,%s)"
     val = (user_id, question_id,result )
     remote_connect.execute(sql, val)
 
 
-def insert_question(user_id, question_id , result):
+def insert_question(question,multy,clas):
 
 
-    sql = "INSERT INTO questions (question) VALUES (%s,%s,%s)"
-    val = (user_id, question_id , result)
+    sql = "INSERT INTO questions (question,multy,clas) VALUES (%s,%s,%s)"
+    val = (question,multy,clas)
     remote_connect.execute(sql, val)
 
     remote_connect.commit()
@@ -71,5 +71,5 @@ def insert_user(name,last_name,email_adres,email_kind,age_child,direction,contac
 
 
 
-print(select_database('*', 'users', 1))
+print(select_Culumn_out_of_database('*', 'users', 1))
 
