@@ -46,14 +46,26 @@ def select_answer(data, IDin):
     my_conn.close()
     remote_connect.close()
     return sel;
-def select_quesions(data,clas):
-    my_conn.execute(("SELECT" +data + " FROM questions WHERE ID = %s"), (clas,))
+def select_question_text(clas):
+    my_conn.execute(("SELECT question FROM questions WHERE ID = %s"), (clas,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
     remote_connect.close()
-    return sel;
+    return sel
+def select_question_type(clas):
+    my_conn.execute(("SELECT multy FROM questions WHERE ID = %s"), (clas,))
+    sel = remote_connect.fetchone()
+    remote_connect.commit()
+    sel = better_string(sel)
+    my_conn.close()
+    remote_connect.close()
+    return sel
+
+def select_questions():
+    return 0
+
 def select_results(data,IDin):
     my_conn.execute(("SELECT " + data + " FROM results WHERE clas = %s"), (IDin,))
     sel = remote_connect.fetchone()
@@ -86,7 +98,7 @@ def insert_result(user_id, question_id , result):
 
 
 
-def insert_question(question,multy,clas):
+def insert_question_with_answer(question,multy,clas, answer, possible):
 
 
     sql = "INSERT INTO questions (question,multy,clas) VALUES (%s,%s,%s)"
@@ -152,7 +164,5 @@ def update_users(name,last_name,email_address,email_child,age_child,direction,co
     remote_connect.close()
 
 
-print(select_users('*', 'users', 1))
-print(('*', 'users', 1))
 
 
