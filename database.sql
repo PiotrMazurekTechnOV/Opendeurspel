@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`answers` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `answer` TEXT(50) NOT NULL,
   `questions_id` INT NOT NULL,
+  `correct` TEXT(50) NOT NULL,
+  `possible` TEXT(50) NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
