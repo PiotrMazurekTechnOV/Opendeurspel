@@ -11,14 +11,12 @@ from tkinter import *
 #imagelabel.place(x = 0, y = 0,relwidth = 1, relheight = 1)
 #hallo = Label(root)
 
-        #De SetUp code voor openVraag
+        #De SetUp code voor choose
         ##Er moet nog de database code hier in komen.
 
 def SetUp():
     import tkinter as tk
     import os
-
-
 
     vraag = "What is the capital of France?"
     antwoorden = "Paris,Londen,Berlin,Rome"

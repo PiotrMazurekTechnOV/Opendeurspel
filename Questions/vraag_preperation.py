@@ -2,9 +2,9 @@ import vraag1_openVraag
 import vraag2_multipleChoise
 import vraag3_choose
 from tkinter import *
+import database as db
 
 vraagKeuze = 4
-
 main = Tk()
 
 if vraagKeuze == 4:
@@ -15,7 +15,8 @@ if vraagKeuze == 4:
     def submit():  # Callback function for SUBMIT Button
         klas = textbox.get("1.0", END)  # For line 1, col 0 to end.
         print(klas)
-
+        vraag = db.select_question_text(klas)
+        print(vraag)
 
         #database compare klas met ID en vraag de soort
         vraagKeuze = 2
