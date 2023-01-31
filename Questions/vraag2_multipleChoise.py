@@ -7,6 +7,9 @@ import tkinter as tk
 # option_b_check = datbase
 # option_c_check = datbase
 # option_d_check = datbase
+
+answersDB = "a,b,c,nd" #data uit database
+
 def SetUp():
 
     class Quiz(tk.Tk):
@@ -23,7 +26,10 @@ def SetUp():
             self.option_c.set("Blue")
             self.option_d = tk.StringVar()
             self.option_d.set("Green")
-            self.correct_answers = {"a", "b","c","nd",None}
+            
+            self.correct_answers = answersDB.split(separator=",")
+            self.correct_answers.append(None)
+            #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
             self.create_widgets()
 
         def create_widgets(self):
