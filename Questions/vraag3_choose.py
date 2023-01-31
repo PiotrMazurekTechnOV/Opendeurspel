@@ -11,7 +11,7 @@ from tkinter import *
 #imagelabel.place(x = 0, y = 0,relwidth = 1, relheight = 1)
 #hallo = Label(root)
 
-def MyFunction():
+def SetUp():
     import tkinter as tk
     import os
     class Quiz(tk.Tk):

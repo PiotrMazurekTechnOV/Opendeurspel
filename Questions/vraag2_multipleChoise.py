@@ -7,7 +7,7 @@ import tkinter as tk
 # option_b_check = datbase
 # option_c_check = datbase
 # option_d_check = datbase
-def MyFunction():
+def SetUp():
 
     class Quiz(tk.Tk):
         def __init__(self):

@@ -1,5 +1,5 @@
 from tkinter import *
-def MyFunction():
+def SetUp():
     import tkinter as tk
     import os
     #from database_gip import *

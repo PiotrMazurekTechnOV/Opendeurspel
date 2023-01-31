@@ -3,14 +3,14 @@ import vraag2_multipleChoise
 import vraag3_choose
 from tkinter import *
 
-vraagKeuze = 2
+vraagKeuze = 1
 
 if vraagKeuze == 0:
     print("0")
-    vraag1_openVraag.MyFunction()
+    vraag1_openVraag.SetUp()
 elif vraagKeuze == 1:
     print("1")
-    vraag2_multipleChoise.MyFunction()
+    vraag2_multipleChoise.SetUp()
 else:
     print("2")
-    vraag3_choose.MyFunction()
+    vraag3_choose.SetUp()
