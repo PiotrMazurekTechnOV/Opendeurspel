@@ -95,7 +95,7 @@ def update_user(name,last_name,email_adres,email_kind,age_child,direction,contac
     except:
 
         remote_connect.rollback()
-    sql = '''SELECT * from questions'''
+    sql = '''SELECT * from user'''
     remote_connect.execute(sql)
     print(remote_connect.fetchall())
     remote_connect.close()
