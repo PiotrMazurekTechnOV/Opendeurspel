@@ -101,7 +101,7 @@ def insert_result(user_id, question_id , result):
 def insert_question_with_answer(question,multy,clas, answer, possible):
 
 
-    sql = "INSERT INTO questions (question,multy,clas) VALUES (%s,%s,%s)"
+    sql = "INSERT INTO questions (question,multy,clas,answer,possible) VALUES (%s,%s,%s)"
     val = (question,multy,clas)
     my_conn.execute(sql, val)
 
