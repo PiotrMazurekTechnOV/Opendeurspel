@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`questions` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `question` TEXT(45) NOT NULL,
   `multy` INT(45) NOT NULL,
+   `clas` TEXT(45) NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
