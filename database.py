@@ -92,7 +92,7 @@ def select_results(data,IDin):
 
 def count_true_results( IDin):
     my_conn.execute(("SELECT COUNT( result ) FROM result WHERE result = true,ID= %s"),(IDin,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -119,7 +119,9 @@ def insert_question_with_answer(question,multy,clas, answer, possible):
     sql = "INSERT INTO questions (question,multy,clas) VALUES (%s,%s,%s)"
     val = (question,multy,clas)
     my_conn.execute(sql, val)
-
+    sql = "INSERT INTO answers(answer,possible) VALUES (%s,%s)"
+    val = (question, multy, clas)
+    my_conn.execute(sql, val)
     remote_connect.commit()
     my_conn.close()
     remote_connect.close()
