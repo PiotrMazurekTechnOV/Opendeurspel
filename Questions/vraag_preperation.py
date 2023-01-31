@@ -3,7 +3,7 @@ import vraag2_multipleChoise
 import vraag3_choose
 from tkinter import *
 
-vraagKeuze = 0
+vraagKeuze = 2
 
 if vraagKeuze == 0:
     print("0")
