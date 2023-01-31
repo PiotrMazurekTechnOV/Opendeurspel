@@ -77,7 +77,7 @@ def select_results(data,IDin):
 
 def count_true_results( IDin):
     my_conn.execute(("SELECT COUNT( result ) FROM result WHERE result = true,ID= %s"),(IDin,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
