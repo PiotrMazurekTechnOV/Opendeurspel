@@ -14,39 +14,141 @@ class VragenPagina(Pagina):
    def __init__(self, *args, **kwargs):
         Pagina.__init__(self, *args, **kwargs)
 
+        vraag_namen = {"vraag1", "vraag2"}
+        vragen = {"vraag1": "Ja?", "vraag2": "Nee?"}
+        antwoorden = {"vraag1": {"antw1": (True, "juist antwoord"), 
+        "antw2": (False, "nee eing ni"), "antw3": (False, "ma echt"), 
+        "antw4": (False, "")}, "vraag2": {"antw1": (False, "niet juist antwoord"), 
+        "antw2": (False, "nee eing ni"), "antw3": (True, "ma echt"), 
+        "antw4": (False, "a")}}
+
         geselecteerde_vraag = StringVar(self)
-        vragen = ["vraag1", "vraag2"]
+        geselecteerde_vraag.set("Selecteer een vraag")
+
+        def vraag_selecteer(vraag):
+            vraag_naam.delete(0, END)
+            vraag_naam.insert(0, vraag)
+
+            vraag_entry.delete(0, END)
+            vraag_entry.insert(0, vragen.get(vraag))
+
+            antwoord1.delete(0, END)
+            antwoord1.insert(0, antwoorden.get(vraag).get("antw1")[1])
+            antwoord1_checkbox.select() if antwoorden.get(vraag).get("antw1")[0] else antwoord1_checkbox.deselect()
+
+            antwoord2.delete(0, END)
+            antwoord2.insert(0, antwoorden.get(vraag).get("antw2")[1])
+            antwoord2_checkbox.select() if antwoorden.get(vraag).get("antw2")[0] else antwoord2_checkbox.deselect()
+
+            antwoord3.delete(0, END)
+            antwoord3.insert(0, antwoorden.get(vraag).get("antw3")[1])
+            antwoord3_checkbox.select() if antwoorden.get(vraag).get("antw3")[0] else antwoord3_checkbox.deselect()
+
+            antwoord4.delete(0, END)
+            antwoord4.insert(0, antwoorden.get(vraag).get("antw4")[1])
+            antwoord4_checkbox.select() if antwoorden.get(vraag).get("antw4")[0] else antwoord4_checkbox.deselect()
+
+            geselecteerde_vraag.set(vraag)
+        
+        def vraag_delete():
+            vraag_namen.remove(vraag_naam.get())
+            vraag_naam.delete(0, END)
+            vraag_entry.delete(0, END)
+
+            antwoord1.delete(0, END)
+            antwoord1_checkbox.deselect()
+
+            antwoord2.delete(0, END)
+            antwoord2_checkbox.deselect()
+
+            antwoord3.delete(0, END)
+            antwoord3_checkbox.deselect()
+
+            antwoord4.delete(0, END)
+            antwoord4_checkbox.deselect()
+
+            geselecteerde_vraag.set("Selecteer een vraag")
+            updateMenu()
+
+        def maak_vraag():
+            vraag_namen.add(vraag_naam.get())
+            geselecteerde_vraag.set(vraag_naam.get())
+
+            vragen[vraag_naam.get()] = vraag_entry.get()
+
+            antwoorden[vraag_naam.get()] = {"antw1": (check1.get(), antwoord1.get()),
+                "antw2": (check2.get(), antwoord2.get()),
+                "antw3": (check3.get(), antwoord3.get()),
+                "antw4": (check4.get(), antwoord4.get())}
+
+            updateMenu()
+
+        def updateMenu():
+            menu = selecteer_vraag["menu"]
+            menu.delete(0, "end")
+            for string in vraag_namen:
+                menu.add_command(label=string, command=lambda value=string: vraag_selecteer(value))
 
         #selecteer vraag menu
-        selecteer_vraag = OptionMenu(self, geselecteerde_vraag, *vragen)
-        selecteer_vraag.configure(bd = 1, indicatoron=0, height=2, width=10)
-        selecteer_vraag.place(relx=0.5, rely=0.2, anchor=N)
+        selecteer_vraag = OptionMenu(self, geselecteerde_vraag, *vraag_namen, command=vraag_selecteer)
+        selecteer_vraag.configure(bd = 1, indicatoron=0, height=2, width=20)
+        selecteer_vraag.place(relx=0.05, rely=0.175)
 
         #vraag aanmaak knop
-        maak_vraag = Button(self, text="Creer nieuwe vraag")
-        maak_vraag.place(relx=0.5, rely=0.3, anchor=N)
+        maak_vraag = Button(self, text="Creer nieuwe vraag", command=maak_vraag)
+        maak_vraag.place(relx=0.05, rely=0.05)
 
         #vraag naam text
         vraag_naam = Entry(self)
-        vraag_naam.place(relx=0.5, rely=0.35, anchor=N)
+        vraag_naam.place(relx=0.05, rely=0.14)
 
         #vraag delete knop
-        delete_vraag = Button(self, text="Verwijder vraag")
-        delete_vraag.place(relx=0.5, rely=0.4, anchor=N)
+        delete_vraag = Button(self, text="Verwijder vraag", command=vraag_delete)
+        delete_vraag.place(relx=0.05, rely=0.09)
 
-        #weizig antwoorden vraag knop
-        antwoorden_aanpassen = Button(self, text="Antwoorden aanpassen")
-        antwoorden_aanpassen.place(relx=0.5, rely=0.45, anchor=N)
+        #vraag text
+        vraag_entry = Entry(self)
+        vraag_entry.place(relx=0.15, rely=0.14)
 
-        #toon alle antwoorden treeview
-        antwoorden = ttk.Treeview(self)
-        antwoorden.place(relx=0.5, rely=0.5, anchor=N)
+        #antwoord1 text
+        antwoord1 = Entry(self)
+        antwoord1.place(relx=0.05, rely=0.3)
 
-        def itemClicked(self):
-            print("a", antwoorden.focus())
 
-        antwoorden.insert('', 'end', text="Antwoord 1", tags=('ttk',))
-        antwoorden.tag_bind('ttk', '<1>', itemClicked) 
+        #antwoord1 checkbox
+        check1 = BooleanVar()
+        antwoord1_checkbox = Checkbutton(self, text="Correct antwoord", variable=check1)
+        antwoord1_checkbox.place(relx=0.05, rely=0.35)
+
+        #antwoord2 text
+        antwoord2 = Entry(self)
+        antwoord2.place(relx=0.05, rely=0.4)
+
+        #antwoord2 checkbox
+        check2 = BooleanVar()
+        antwoord2_checkbox = Checkbutton(self, text="Correct antwoord", variable=check2)
+        antwoord2_checkbox.place(relx=0.05, rely=0.45)
+
+        #antwoord3 text
+        antwoord3 = Entry(self)
+        antwoord3.place(relx=0.05, rely=0.5)
+
+        #antwoord3 checkbox
+        check3 = BooleanVar()
+        antwoord3_checkbox = Checkbutton(self, text="Correct antwoord", variable=check3)
+        antwoord3_checkbox.place(relx=0.05, rely=0.55)
+
+        #antwoord4 text
+        antwoord4 = Entry(self)
+        antwoord4.place(relx=0.05, rely=0.6)
+
+        #antwoord4 checkbox
+        check4 = BooleanVar()
+        antwoord4_checkbox = Checkbutton(self, text="Correct antwoord", variable=check4)
+        antwoord4_checkbox.place(relx=0.05, rely=0.65)
+
+     
+
         
 
 
@@ -105,3 +207,8 @@ if __name__ == "__main__":
     root.mainloop()
 
 #Vragen toevoegen/ aanpassen, antwoorden aanpassen
+
+
+#0 openvraag
+#1 meerkeuzevraag 4 antwoorden 1 juist
+#2 alle_juiste_antwoorden 4 antwoorden met 2-3 juist

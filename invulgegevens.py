@@ -150,13 +150,13 @@ class GegevensPagina(Pagina):
 
         def gegevens_ingevuld():
             global adressin, numm, eoudin
-            naam = naam_entry.get()
-            achternaam = achternaam_entry.get()
-            leeftijd = leeftijd_entry.get()
-            telefoonnummer = tel_entry.get()
-            naam_ouder = ouder_entry.get()
-            email_kind = email_kind_entry.get()
-            email_ouder = email_ouders_entry.get()
+            naam = naam_entry.entry.get()
+            achternaam = achternaam_entry.entry.get()
+            leeftijd = leeftijd_entry.entry.get()
+            telefoonnummer = tel_entry.entry.get()
+            naam_ouder = ouder_entry.entry.get()
+            email_kind = email_kind_entry.entry.get()
+            email_ouder = email_ouders_entry.entry.get()
             contact_value = contact_box.instate(['selected'])
 
             ##### check e-mail
