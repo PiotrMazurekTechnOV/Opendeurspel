@@ -32,23 +32,44 @@ def better_string(string):
 
 def select_users(data , code):
     remote_connect.execute(("SELECT " + data+ " FROM  users WHERE code = %s"), (code,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
     remote_connect.close()
     return sel;
+<<<<<<< HEAD
 def select_answer(data, IDin):
     remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
+    sel = my_conn.fetchone()
+=======
+def select_answer(clas):
+    question_id = select_questionid(clas)
+    sel = select_ID_INqestion(question_id)
+    return sel;
+
+def select_ID_INqestion(clas):
+    my_conn.execute(("SELECT ID FROM questions WHERE clas = %s"), (clas,))
+    sel = remote_connect.fetchone()
+>>>>>>> d5fd1935fffe8a8d3b2086a7d400a4968d50a8ec
+    remote_connect.commit()
+    sel = better_string(sel)
+    my_conn.close()
+    remote_connect.close()
+    return sel
+
+def select_questionid(clas):
+    my_conn.execute(("SELECT answer FROM answers WHERE question_id = %s"), (clas,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
     remote_connect.close()
-    return sel;
+    return sel
+
 def select_question_text(clas):
     my_conn.execute(("SELECT question FROM questions WHERE ID = %s"), (clas,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -56,7 +77,7 @@ def select_question_text(clas):
     return sel
 def select_question_type(clas):
     my_conn.execute(("SELECT multy FROM questions WHERE ID = %s"), (clas,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -68,7 +89,7 @@ def select_questions():
 
 def select_results(data,IDin):
     my_conn.execute(("SELECT " + data + " FROM results WHERE clas = %s"), (IDin,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -77,7 +98,7 @@ def select_results(data,IDin):
 
 def count_true_results( IDin):
     my_conn.execute(("SELECT COUNT( result ) FROM result WHERE result = true,ID= %s"),(IDin,))
-    sel = remote_connect.fetchone()
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
@@ -104,7 +125,9 @@ def insert_question_with_answer(question,multy,clas, answer, possible):
     sql = "INSERT INTO questions (question,multy,clas) VALUES (%s,%s,%s)"
     val = (question,multy,clas)
     my_conn.execute(sql, val)
-
+    sql = "INSERT INTO answers(answer,possible) VALUES (%s,%s)"
+    val = (question, multy, clas)
+    my_conn.execute(sql, val)
     remote_connect.commit()
     my_conn.close()
     remote_connect.close()
@@ -133,7 +156,7 @@ def update_questions(question,multy,clas):
         remote_connect.rollback()
     sql = '''SELECT * from questions'''
     my_conn.execute(sql)
-    print(remote_connect.fetchall())
+    print(my_conn.fetchall())
     my_conn.close()
     remote_connect.close()
 def insert_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
@@ -159,7 +182,7 @@ def update_users(name,last_name,email_address,email_child,age_child,direction,co
         remote_connect.rollback()
     sql = '''SELECT * from user'''
     my_conn.execute(sql)
-    print(remote_connect.fetchall())
+    print(my_conn.fetchall())
     my_conn.close()
     remote_connect.close()
 
