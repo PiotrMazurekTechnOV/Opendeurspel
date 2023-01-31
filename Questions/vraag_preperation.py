@@ -14,7 +14,6 @@ if vraagKeuze == 4:
 
     def submit():  # Callback function for SUBMIT Button
         klas = textbox.get("1.0", END)  # For line 1, col 0 to end.
-        print(klas)
 
 
         #database compare klas met ID en vraag de soort
@@ -24,15 +23,15 @@ if vraagKeuze == 4:
         if vraagKeuze == 0:
             print("0")
             main.destroy()
-            vraag1_openVraag.SetUp()
+            vraag1_openVraag.SetUp(klas)
         elif vraagKeuze == 1:
             print("1")
             main.destroy()
-            vraag2_multipleChoise.SetUp()
+            vraag2_multipleChoise.SetUp(klas)
         elif vraagKeuze == 2:
             print("2")
             main.destroy()
-            vraag3_choose.SetUp()
+            vraag3_choose.SetUp(klas)
             
     c = Canvas(main, width=width, height=height, highlightthickness=0)
     c.pack()
