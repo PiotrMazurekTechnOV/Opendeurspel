@@ -13,9 +13,12 @@ Nuttig om te weten:
     => Neemt een string-imput als argument en verwerkt deze string door bepaalde tekens te vervangen door lege strings.
 
 Queries:
-    1) def select_Culumn_out_of_database(tabel, kolom, IDin)
+Parameters: 
+    - Data = In het algemeen stelt deze parameter voor, wat je eigenlijk wilt van die speciefieke tabel.
 
-    => In het algemeen helpt deze functie om speciefieke gegevens uit een database op te halen op basis van een ID_nummer, door middel van een SELECT-query.
+    1) def select_users(data, IDin)
+
+    => Alle data van de tabel users selecteren.
 
     2) def count_true_results(tabel, kolom, IDin)
 
