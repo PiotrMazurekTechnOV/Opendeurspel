@@ -2,11 +2,11 @@ import mysql.connector
 
 
 
-my_connect = mysql.connector.connect(
-  host="172.0.0.1",
-  user= "",
-  passwd="",
-  database="database_opendeurdag",)
+#my_connect = mysql.connector.connect(
+ # host="127.0.0.1",
+  #user= "",
+  #passwd="",
+  #database="database_opendeurdag",)
 
 remote_connect = mysql.connector.connect(
   host="192.168.125.2",
@@ -14,7 +14,7 @@ remote_connect = mysql.connector.connect(
   passwd="opendeur",
   database="database_opendeurdag",)
 
-my_conn = my_connect.cursor(buffered=True)
+my_conn = remote_connect .cursor(buffered=True)
 
 
 def my_connect_database_opendeurdag():
