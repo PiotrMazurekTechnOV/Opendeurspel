@@ -8,6 +8,12 @@ my_connect = mysql.connector.connect(
   passwd="",
   database="database_opendeurdag",)
 
+ remote_connect = mysql.connector.connect(
+  host="192.168.125.2",
+  user= "opendeur",
+  passwd="opendeur",
+  database="database_opendeurdag",)
+
 my_conn = my_connect.cursor(buffered=True)
 
 
@@ -25,9 +31,9 @@ def better_string(string):
   return string;
 
 def select_database(wat, waar, IDin):
-    my_conn.execute(("SELECT " + wat + " FROM " + waar + " WHERE ID = %s"), (IDin,))
-    sel = my_conn.fetchone()
-    my_connect.commit()
+    remote_connect.execute(("SELECT " + wat + " FROM " + waar + " WHERE ID = %s"), (IDin,))
+    sel = remote_connect.fetchone()
+    remote_connect.commit()
     sel = better_string(sel)
     return sel;
 
@@ -55,3 +61,5 @@ def insert_question(user_id, question_id , result):
 
     mydb.commit()
 
+
+select_database('*', 'users', 1);
