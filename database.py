@@ -36,7 +36,7 @@ def select_users(data , IDin):
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
-def select_answer(data, kolom, IDin):
+def select_answer(data, IDin):
     remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
@@ -54,8 +54,8 @@ def select_results(data, IDin):
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
-def count_true_results(tabel, kolom, IDin):
-    remote_connect.execute(("SELECT COUNT(" +tabel + ") FROM " +kolom +"WHERE result = true,ID= %s"),(IDin,))
+def count_true_results( IDin):
+    remote_connect.execute(("SELECT COUNT( result ) FROM result WHERE result = true,ID= %s"),(IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
