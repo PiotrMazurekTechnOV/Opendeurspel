@@ -46,16 +46,16 @@ def select_answer(data, IDin):
     my_conn.close()
     remote_connect.close()
     return sel;
-def select_quesions(data,IDin):
-    my_conn.execute(("SELECT" +data + " FROM questions WHERE ID = %s"), (IDin,))
+def select_quesions(data,clas):
+    my_conn.execute(("SELECT" +data + " FROM questions WHERE ID = %s"), (clas,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
     remote_connect.close()
     return sel;
-def select_results(data,clas):
-    my_conn.execute(("SELECT " + data + " FROM results WHERE clas = %s"), (clas,))
+def select_results(data,IDin):
+    my_conn.execute(("SELECT " + data + " FROM results WHERE clas = %s"), (IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
