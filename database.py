@@ -90,7 +90,7 @@ def insert_question(question,multy,clas):
     remote_connect.close()
 
 def insert_answers(answer, questions_id, correct, possible):
-    sql = "INSERT INTO result (answer, questions_id, correct, possible) VALUES (%s, %s,%s)"
+    sql = "INSERT INTO answers (answer, questions_id, correct, possible) VALUES (%s, %s,%s)"
     val = (answer, questions_id, correct, possible)
     my_conn.execute(sql, val)
     remote_connect.close()
