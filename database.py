@@ -54,4 +54,11 @@ def insert_question(user_id, question_id , result):
     mycursor.execute(sql, val)
 
     mydb.commit()
+def insert_user():
+    mycursor = mydb.cursor()
 
+    sql = "INSERT INTO user () VALUES ( %s)"
+    val = (question)
+    mycursor.execute(sql, val)
+
+    mydb.commit()
