@@ -13,24 +13,45 @@ from tkinter import *
 
         #De SetUp code voor openVraag
         ##Er moet nog de database code hier in komen.
+
 def SetUp():
     import tkinter as tk
     import os
+
+
+
+    vraag = "What is the capital of France?"
+    antwoorden = "Paris,Londen,Berlin,Rome"
+    correctAnswer = "a"
+
+    antwoordeLijst = antwoorden.split(',')
+    print(antwoordeLijst)
+
+    aAntwoord = antwoordeLijst[0]
+    bAntwoord = antwoordeLijst[1]
+    cAntwoord = antwoordeLijst[2]
+    dAntwoord = antwoordeLijst[3]
+
+    print(aAntwoord)
+    print(bAntwoord)
+    print(cAntwoord)
+    print(dAntwoord)
+
     class Quiz(tk.Tk):
         def __init__(self):
             super().__init__()
             self.title("Quiz")
             self.question = tk.StringVar()
-            self.question.set("What is the capital of France?")
+            self.question.set(vraag)
             self.option_a = tk.StringVar()
-            self.option_a.set("Paris")
+            self.option_a.set(aAntwoord)
             self.option_b = tk.StringVar()
-            self.option_b.set("London")
+            self.option_b.set(bAntwoord)
             self.option_c = tk.StringVar()
-            self.option_c.set("Berlin")
+            self.option_c.set(cAntwoord)
             self.option_d = tk.StringVar()
-            self.option_d.set("Rome")
-            self.correct_answer = "a"
+            self.option_d.set(dAntwoord)
+            self.correct_answer = correctAnswer
             self.v = tk.StringVar()
             self.create_widgets()
 

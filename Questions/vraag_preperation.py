@@ -18,7 +18,7 @@ if vraagKeuze == 4:
 
 
         #database compare klas met ID en vraag de soort
-        vraagKeuze = 0
+        vraagKeuze = 2
 
 
         if vraagKeuze == 0:
