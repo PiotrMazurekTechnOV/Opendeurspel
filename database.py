@@ -2,17 +2,17 @@ import mysql.connector
 
 
 
-#my_connect = mysql.connector.connect(
- # host="127.0.0.1",
-  #user= "",
-  #passwd="",
-  #database="database_opendeurdag",)
-
 remote_connect = mysql.connector.connect(
-  host="192.168.125.2",
-  user= "opendeur",
-  passwd="opendeur",
+  host="127.0.0.1",
+  user= "",
+  passwd="",
   database="database_opendeurdag",)
+
+#remote_connect = mysql.connector.connect(
+ # host="192.168.125.2",
+ # user= "opendeur",
+ # passwd="opendeur",
+ # database="database_opendeurdag",)
 
 my_conn = remote_connect .cursor(buffered=True)
 
@@ -100,5 +100,5 @@ def update_user(name,last_name,email_adres,email_kind,age_child,direction,contac
     print(remote_connect.fetchall())
     remote_connect.close()
 
-print(select_Culumn_out_of_database('*', 'users', 1))
+print(('*', 'users', 1))
 
