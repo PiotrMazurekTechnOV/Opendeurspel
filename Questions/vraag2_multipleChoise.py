@@ -1,4 +1,5 @@
 import tkinter as tk
+import database
 
 ## Option_a_check is niet zichtbaar voor check en is dus niet bruikbaar op lijn 45-50 
 ## Zie benden!
@@ -10,14 +11,15 @@ import tkinter as tk
 
 answersDB = "a,b,c,nd" #data uit database
 
-def SetUp():
+def SetUp(klas):
 
     class Quiz(tk.Tk):
         def __init__(self):
             super().__init__()
             self.title("Quiz")
             self.question = tk.StringVar()
-            self.question.set("Which are the colors of the French flag?")
+            database.select_question_text(klas)
+            self.question.set(database.select_question_text(klas))
             self.option_a = tk.StringVar()
             self.option_a.set("Red")
             self.option_b = tk.StringVar()
