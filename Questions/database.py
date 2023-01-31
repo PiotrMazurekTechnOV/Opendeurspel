@@ -47,20 +47,21 @@ def select_answer(data, IDin):
     remote_connect.close()
     return sel;
 def select_question_text(clas):
-    my_conn.execute(("SELECT question FROM questions WHERE ID = %s"), (clas,))
-    sel = remote_connect.fetchone()
+    my_conn.execute(("SELECT question FROM questions WHERE clas = %s"), (clas,))
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
     remote_connect.close()
     return sel
 def select_question_type(clas):
-    my_conn.execute(("SELECT multy FROM questions WHERE ID = %s"), (clas,))
-    sel = remote_connect.fetchone()
+    my_conn.execute(("SELECT multy FROM questions WHERE clas = %s"), (clas,))
+    sel = my_conn.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
     remote_connect.close()
+    print(sel)
     return sel
 
 def select_questions():

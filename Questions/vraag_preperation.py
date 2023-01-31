@@ -14,6 +14,7 @@ if vraagKeuze == 4:
 
     def submit():  # Callback function for SUBMIT Button
         klas = textbox.get("1.0", END)  # For line 1, col 0 to end.
+        print(str(klas))
         print(klas)
         vraag = db.select_question_text(klas)
         print(vraag)
