@@ -24,3 +24,7 @@ Queries:
     3) def insert_result(user_id, question_id , result)
 
     => Heel simpel, het gaat gewoon een nieuwe rij toevoegen aan de tabel "result" in de database.
+
+    4) def insert_question(question,multy,clas)
+
+    => Nieuwe rij toevoegen aan de tabel "questions" in de database.
