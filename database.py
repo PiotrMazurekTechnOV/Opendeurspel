@@ -2,17 +2,17 @@ import mysql.connector
 
 
 
-#my_connect = mysql.connector.connect(
- # host="127.0.0.1",
-  #user= "",
-  #passwd="",
-  #database="database_opendeurdag",)
-
 remote_connect = mysql.connector.connect(
-  host="192.168.125.2",
-  user= "opendeur",
-  passwd="opendeur",
+  host="127.0.0.1",
+  user= "",
+  passwd="",
   database="database_opendeurdag",)
+
+#remote_connect = mysql.connector.connect(
+ # host="192.168.125.2",
+ # user= "opendeur",
+ # passwd="opendeur",
+ # database="database_opendeurdag",)
 
 my_conn = remote_connect .cursor(buffered=True)
 
@@ -30,8 +30,8 @@ def better_string(string):
     '[', '').replace(']', '')
   return string;
 
-def select_user(data , IDin):
-    remote_connect.execute(("SELECT " + data+ " FROM  user WHERE ID = %s"), (IDin,))
+def select_users(data , IDin):
+    remote_connect.execute(("SELECT " + data+ " FROM  users WHERE ID = %s"), (IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
@@ -79,6 +79,12 @@ def insert_question(question,multy,clas):
 
     remote_connect.commit()
 
+def insert_answers(answer, questions_id, correct, possible):
+    sql = "INSERT INTO result (answer, questions_id, correct, possible) VALUES (%s, %s,%s)"
+    val = (answer, questions_id, correct, possible)
+    remote_connect.execute(sql, val)
+
+
 def update_questions(question,multy,clas):
     sql = 'UPDATE questions SET question = '+question+', multy = '+multy+ ', clas = '+clas+''
     try:
@@ -94,7 +100,7 @@ def update_questions(question,multy,clas):
     remote_connect.execute(sql)
     print(remote_connect.fetchall())
     remote_connect.close()
-def insert_user(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
+def insert_users(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
 
 
 
@@ -102,7 +108,7 @@ def insert_user(name,last_name,email_adres,email_kind,age_child,direction,contac
     val = (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code)
     remote_connect.execute(sql, val)
 
-def update_user(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
+def update_users(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
     sql = 'UPDATE  user SET name = ' + name + ', last_name = ' + last_name + ', email_adres= ' + email_adres + 'email_kind ='+email_kind+'age_child = '+age_child+ 'direction='+direction+'contact ='+contact+'phone_number ='+phone_number+ 'code ='+code+ ''
     try:
         # Execute the SQL command
@@ -118,5 +124,8 @@ def update_user(name,last_name,email_adres,email_kind,age_child,direction,contac
     print(remote_connect.fetchall())
     remote_connect.close()
 
-print(select_user('*', 'users', 1))
+
+print(select_users('*', 'users', 1))
+print(('*', 'users', 1))
+
 

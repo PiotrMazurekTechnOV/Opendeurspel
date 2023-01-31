@@ -1,6 +1,6 @@
 # Opendeurspel
 
-# Database
+# DataBase
 Connection --> Ons definitieve "ontwerp" zal de remote_connection gebruiken, zodat we dus kunnen communiceren met een andere server.
 
 Nuttig om te weten: 
@@ -41,4 +41,6 @@ Queries:
 
     => In de tabel "user", elke variabele veranderen met de variabele die hij heeft gekregen.
 
+
+# Opstelling
 
