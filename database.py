@@ -8,6 +8,12 @@ my_connect = mysql.connector.connect(
   passwd="",
   database="database_opendeurdag",)
 
+remote_connect = mysql.connector.connect(
+  host="192.168.125.2",
+  user= "opendeur",
+  passwd="opendeur",
+  database="database_opendeurdag",)
+
 my_conn = my_connect.cursor(buffered=True)
 
 
@@ -25,9 +31,9 @@ def better_string(string):
   return string;
 
 def select_database(wat, waar, IDin):
-    my_conn.execute(("SELECT " + wat + " FROM " + waar + " WHERE ID = %s"), (IDin,))
-    sel = my_conn.fetchone()
-    my_connect.commit()
+    remote_connect.execute(("SELECT " + wat + " FROM " + waar + " WHERE ID = %s"), (IDin,))
+    sel = remote_connect.fetchone()
+    remote_connect.commit()
     sel = better_string(sel)
     return sel;
 
@@ -38,27 +44,32 @@ def count_true_results(wat, waar, IDin):
     sel = better_string(sel)
     return sel;
 #invoeren van een resultaat op een gestelde vraag
-def insert_result(user_id, question_id , result): 
-    mycursor = mydb.cursor()
+def insert_result(user_id, question_id , result):
+
 
     sql = "INSERT INTO result (questions_id, users_id,result) VALUES (%s, %s)"
     val = (user_id, question_id,result )
-    mycursor.execute(sql, val)
+    my_conn.execute(sql, val)
 
-    mydb.commit()
+
 def insert_question(user_id, question_id , result):
-    mycursor = mydb.cursor()
 
-    sql = "INSERT INTO questions (question) VALUES ( %s)"
-    val = (question)
-    mycursor.execute(sql, val)
 
-    mydb.commit()
-def insert_user():
-    mycursor = mydb.cursor()
+    sql = "INSERT INTO questions (question) VALUES (%s,%s,%s)"
+    val = (user_id, question_id , result)
+    my_conn.execute(sql, val)
 
-    sql = "INSERT INTO user () VALUES ( %s)"
-    val = (question)
-    mycursor.execute(sql, val)
+    my_conn.commit()
+def insert_user(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
 
-    mydb.commit()
+
+
+    sql = "INSERT INTO user (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    val = (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code)
+    my_conn.execute(sql, val)
+
+
+
+
+print(select_database('*', 'users', 1))
+
