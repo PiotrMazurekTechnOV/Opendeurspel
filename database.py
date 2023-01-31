@@ -14,7 +14,7 @@ remote_connect = mysql.connector.connect(
  # passwd="opendeur",
  # database="database_opendeurdag",)
 
-my_conn = remote_connect .cursor(buffered=True)
+my_conn = remote_connect.cursor(buffered=True)
 
 
 def my_connect_database_opendeurdag():
