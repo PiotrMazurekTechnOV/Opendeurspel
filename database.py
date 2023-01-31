@@ -35,6 +35,7 @@ def select_users(data , IDin):
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
+    my_conn.close()
     remote_connect.close()
     return sel;
 def select_answer(data, IDin):
@@ -42,6 +43,7 @@ def select_answer(data, IDin):
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
+    my_conn.close()
     remote_connect.close()
     return sel;
 def select_quesions(data,IDin):
@@ -49,6 +51,7 @@ def select_quesions(data,IDin):
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
+    my_conn.close()
     remote_connect.close()
     return sel;
 def select_results(data, IDin):
@@ -56,6 +59,7 @@ def select_results(data, IDin):
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
+    my_conn.close()
     remote_connect.close()
     return sel;
 
@@ -64,6 +68,7 @@ def count_true_results( IDin):
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
+    my_conn.close()
     remote_connect.close()
     return sel;
 
@@ -76,7 +81,9 @@ def insert_result(user_id, question_id , result):
     val = (user_id, question_id,result )
     my_conn.execute(sql, val)
     remote_connect.commit()
+    my_conn.close()
     remote_connect.close()
+
 
 
 def insert_question(question,multy,clas):
@@ -87,13 +94,17 @@ def insert_question(question,multy,clas):
     my_conn.execute(sql, val)
 
     remote_connect.commit()
+    my_conn.close()
     remote_connect.close()
+
 
 def insert_answers(answer, questions_id, correct, possible):
     sql = "INSERT INTO answers (answer, questions_id, correct, possible) VALUES (%s, %s,%s)"
     val = (answer, questions_id, correct, possible)
     my_conn.execute(sql, val)
+    my_conn.close()
     remote_connect.close()
+
 
 
 
@@ -111,6 +122,7 @@ def update_questions(question,multy,clas):
     sql = '''SELECT * from questions'''
     my_conn.execute(sql)
     print(remote_connect.fetchall())
+    my_conn.close()
     remote_connect.close()
 def insert_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
 
@@ -119,6 +131,7 @@ def insert_users(name,last_name,email_address,email_child,age_child,direction,co
     sql = "INSERT INTO user (name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     val = (name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code)
     my_conn.execute(sql, val)
+    my_conn.close()
     remote_connect.close()
 
 def update_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
@@ -135,6 +148,7 @@ def update_users(name,last_name,email_address,email_child,age_child,direction,co
     sql = '''SELECT * from user'''
     my_conn.execute(sql)
     print(remote_connect.fetchall())
+    my_conn.close()
     remote_connect.close()
 
 
