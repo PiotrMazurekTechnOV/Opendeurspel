@@ -8,7 +8,7 @@ import tkinter as tk
 # option_c_check = datbase
 # option_d_check = datbase
 
-answersDB = "a,b,c" #data uit database
+answersDB = "a,b,c,nd" #data uit database
 
 def SetUp():
 
