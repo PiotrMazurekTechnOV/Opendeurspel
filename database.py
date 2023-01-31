@@ -18,10 +18,10 @@ my_conn = my_connect.cursor(buffered=True)
 
 
 def my_connect_database_opendeurdag():
-  return my_connect;
+  return remote_connect;
 
 def my_conn_database_opendeurdag():
- return my_conn;
+ return remote_connect;
 
 
 def better_string(string):
@@ -39,7 +39,7 @@ def select_database(wat, waar, IDin):
 
 def count_true_results(wat, waar, IDin):
     my_conn.execute(("SELECT COUNT(" +wat + ") FROM " +waar +"WHERE result = true,ID= %s"),(IDin,))
-    sel = my_conn.fetchone()
+    sel = remote_connect.fetchone()
     my_connect.commit()
     sel = better_string(sel)
     return sel;
@@ -49,7 +49,7 @@ def insert_result(user_id, question_id , result):
 
     sql = "INSERT INTO result (questions_id, users_id,result) VALUES (%s, %s)"
     val = (user_id, question_id,result )
-    my_conn.execute(sql, val)
+    remote_connect.execute(sql, val)
 
 
 def insert_question(user_id, question_id , result):
@@ -57,16 +57,16 @@ def insert_question(user_id, question_id , result):
 
     sql = "INSERT INTO questions (question) VALUES (%s,%s,%s)"
     val = (user_id, question_id , result)
-    my_conn.execute(sql, val)
+    remote_connect.execute(sql, val)
 
-    my_conn.commit()
+    remote_connect.commit()
 def insert_user(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code):
 
 
 
     sql = "INSERT INTO user (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     val = (name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code)
-    my_conn.execute(sql, val)
+    remote_connect.execute(sql, val)
 
 
 
