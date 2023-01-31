@@ -1,18 +1,11 @@
 import mysql.connector
 
 
-
 remote_connect = mysql.connector.connect(
-  host="127.0.0.1",
-  user= "",
-  passwd="",
+  host="192.168.125.2",
+  user= "opendeur",
+  passwd="opendeur",
   database="database_opendeurdag",)
-
-#remote_connect = mysql.connector.connect(
- # host="192.168.125.2",
- # user= "opendeur",
- # passwd="opendeur",
- # database="database_opendeurdag",)
 
 my_conn = remote_connect.cursor(buffered=True)
 
@@ -25,9 +18,7 @@ def my_conn_database_opendeurdag():
 
 
 def better_string(string):
-  string = str(string).replace(',', '').replace('(', '').replace(')', '').replace("'", '').replace('{', '').replace('}',
-                                                                                                                    '').replace(
-    '[', '').replace(']', '')
+  string = str(string).replace(',', '').replace('(', '').replace(')', '').replace("'", '').replace('{', '').replace('}', '').replace( '[', '').replace(']', '')
   return string;
 
 def select_users(data , IDin):

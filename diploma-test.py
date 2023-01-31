@@ -1,6 +1,8 @@
 import pdfkit
 import pathlib
 
+
+
 file = open("diploma-test.html","w")
 text = '''
 
