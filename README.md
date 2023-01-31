@@ -28,3 +28,19 @@ Queries:
     4) def insert_question(question,multy,clas)
 
     => Nieuwe rij toevoegen aan de tabel "questions" in de database.
+
+    5) def update_questions(question,multy,clas)
+
+    => In de tabel "questions", elke variabele veranderen met de variabele die hij heeft gekregen.
+
+    6) def insert_user(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code)
+
+    => Wordt gebruikt om een nieuwe user toe te voegen aan je database met specifieke data.
+
+    7) def update_user(name,last_name,email_adres,email_kind,age_child,direction,contact,phone_number,code)
+
+    => In de tabel "user", elke variabele veranderen met de variabele die hij heeft gekregen.
+
+    8) 
+
+
