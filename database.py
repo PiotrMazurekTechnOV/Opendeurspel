@@ -30,19 +30,37 @@ def better_string(string):
     '[', '').replace(']', '')
   return string;
 
-def select_Culumn_out_of_database(tabel, kolom, IDin):
-    remote_connect.execute(("SELECT " + tabel + " FROM " + kolom + " WHERE ID = %s"), (IDin,))
+def select_user(data , IDin):
+    remote_connect.execute(("SELECT " + data+ " FROM  user WHERE ID = %s"), (IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
-
+def select_answer(data, kolom, IDin):
+    remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
+    sel = remote_connect.fetchone()
+    remote_connect.commit()
+    sel = better_string(sel)
+    return sel;
+def select_quesions(data,IDin):
+    remote_connect.execute(("SELECT" +data + " FROM questions WHERE ID = %s"), (IDin,))
+    sel = remote_connect.fetchone()
+    remote_connect.commit()
+    sel = better_string(sel)
+    return sel;
+def select_results(data, IDin):
+    remote_connect.execute(("SELECT " + data + " FROM results WHERE ID = %s"), (IDin,))
+    sel = remote_connect.fetchone()
+    remote_connect.commit()
+    sel = better_string(sel)
+    return sel;
 def count_true_results(tabel, kolom, IDin):
     remote_connect.execute(("SELECT COUNT(" +tabel + ") FROM " +kolom +"WHERE result = true,ID= %s"),(IDin,))
     sel = remote_connect.fetchone()
     remote_connect.commit()
     sel = better_string(sel)
     return sel;
+
 #invoeren van een resultaat op een gestelde vraag
 def insert_result(user_id, question_id , result):
 
@@ -100,5 +118,5 @@ def update_user(name,last_name,email_adres,email_kind,age_child,direction,contac
     print(remote_connect.fetchall())
     remote_connect.close()
 
-print(select_Culumn_out_of_database('*', 'users', 1))
+print(select_user('*', 'users', 1))
 
