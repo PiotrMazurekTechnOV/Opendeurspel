@@ -41,7 +41,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`questions` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `question` INT NOT NULL,
+  `question` TEXT(45) NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
