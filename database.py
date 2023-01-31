@@ -61,6 +61,12 @@ def insert_question(question,multy,clas):
 
     remote_connect.commit()
 
+def insert_answers(answer, questions_id, correct, possible):
+    sql = "INSERT INTO result (answer, questions_id, correct, possible) VALUES (%s, %s,%s)"
+    val = (answer, questions_id, correct, possible)
+    remote_connect.execute(sql, val)
+
+
 def update_questions(question,multy,clas):
     sql = 'UPDATE questions SET question = '+question+', multy = '+multy+ ', clas = '+clas+''
     try:
