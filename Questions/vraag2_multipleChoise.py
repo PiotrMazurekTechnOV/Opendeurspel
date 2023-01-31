@@ -68,12 +68,6 @@ def SetUp():
                 print(selected_answers)
                 print(self.correct_answers)
                 print("---")
-            else:
-                result_label = tk.Label(self, text="Incorrect!")
-                print("")
-                print(selected_answers)
-                print(self.correct_answers)
-                print("---")
             selected_answers.clear()
             result_label.pack()
 
