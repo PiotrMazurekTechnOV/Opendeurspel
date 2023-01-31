@@ -23,13 +23,13 @@ USE `database_opendeurdag` ;
 CREATE TABLE IF NOT EXISTS `database_opendeurdag`.`users` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `name` TEXT(18) NOT NULL,
-  `last name` TEXT(18) NOT NULL,
-  `email adres` TEXT(38) NOT NULL,
-  `email kind` TEXT(38) NOT NULL,
-  `age child` INT NOT NULL,
+  `last_name` TEXT(18) NOT NULL,
+  `email_address` TEXT(38) NOT NULL,
+  `email_child` TEXT(38) NOT NULL,
+  `age_child` INT NOT NULL,
   `direction` TEXT(50) NOT NULL,
   `contact` TINYINT NOT NULL,
-  `phone number` INT NOT NULL,
+  `phone_number` INT NOT NULL,
   `code` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `code_UNIQUE` (`code` ASC) )
