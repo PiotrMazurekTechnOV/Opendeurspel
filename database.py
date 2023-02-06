@@ -38,11 +38,7 @@ def select_users(data , code):
     my_conn.close()
     remote_connect.close()
     return sel;
-<<<<<<< HEAD
-def select_answer(data, IDin):
-    remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
-    sel = my_conn.fetchone()
-=======
+
 def select_answer(clas):
     question_id = select_questionid(clas)
     sel = select_ID_INqestion(question_id)
@@ -51,7 +47,6 @@ def select_answer(clas):
 def select_ID_INqestion(clas):
     my_conn.execute(("SELECT ID FROM questions WHERE clas = %s"), (clas,))
     sel = remote_connect.fetchone()
->>>>>>> d5fd1935fffe8a8d3b2086a7d400a4968d50a8ec
     remote_connect.commit()
     sel = better_string(sel)
     my_conn.close()
