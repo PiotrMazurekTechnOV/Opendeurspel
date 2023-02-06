@@ -181,6 +181,15 @@ def update_users(name,last_name,email_address,email_child,age_child,direction,co
     my_conn.close()
     remote_connect.close()
 
-
+#controleer of code van gebruiker bestaat
+def check_if_code_exists(code):
+    sql = "SELECT code FROM users where code =%s"
+    val = (code)
+    my_conn.execute(sql, val)
+    result = my_conn.fetchall()
+    if(result > 1):
+        return 1
+    else:
+        return 0
 
 
