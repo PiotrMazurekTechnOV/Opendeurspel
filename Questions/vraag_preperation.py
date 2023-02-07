@@ -13,14 +13,16 @@ if vraagKeuze == 4:
     height = 600
 
     def submit():  # Callback function for SUBMIT Button
-        klas = textbox.get("1.0", END)  # For line 1, col 0 to end.
-        print(str(klas))
+        klas = textbox.get("1.0", "end-1c")  # For line 1, col 0 to end.
         print(klas)
+        type = db.select_question_type(klas)
+        print(type)
         vraag = db.select_question_text(klas)
-        print(vraag)
+        antwoorden = db.select_answer(klas)
+        resultaten = db.se
 
         #database compare klas met ID en vraag de soort
-        vraagKeuze = 2
+        vraagKeuze = int(type)
 
 
         if vraagKeuze == 0:
@@ -30,7 +32,7 @@ if vraagKeuze == 4:
         elif vraagKeuze == 1:
             print("1")
             main.destroy()
-            vraag2_multipleChoise.SetUp()
+            vraag2_multipleChoise.SetUp(vraag,resultaten,antwoorden)
         elif vraagKeuze == 2:
             print("2")
             main.destroy()
