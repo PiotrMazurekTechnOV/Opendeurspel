@@ -75,8 +75,11 @@ def insert_question(question_location, question, question_type):
 def select_question(question_location):
     return _execute_select(f'SELECT * FROM questions WHERE question_location = "{question_location}"')
 
+def select_all_questions():
+    return _execute_select(f'SELECT * FROM questions', True)
+
 def update_question(question_location, question, question_type):
-    _execute_query(f'UPDATE questions SET question={question}, question_type={question_type} WHERE question_location={question_location}')
+    _execute_query(f'UPDATE questions SET question="{question}", question_type="{question_type}" WHERE question_location="{question_location}"')
 
 ## ANSWERS
 
@@ -87,7 +90,10 @@ def select_answer(question_location):
     return _execute_select(f"SELECT * FROM answers WHERE question_location = '{question_location}'")
 
 def update_answer(question_location, answers, correct_answers):
-    _execute_query(f'UPDATE questions SET answers={answers}, correct_answers={correct_answers} WHERE question_location={question_location}')
+    _execute_query(f'UPDATE answers SET answers="{answers}", correct_answers="{correct_answers}" WHERE question_location="{question_location}"')
+
+def select_all_answers():
+    return _execute_select(f'SELECT * FROM answers', True)
 
 ##  ANSWERS + QUESTIONS
 
@@ -100,6 +106,7 @@ def update_question_with_answer(question_location, question, question_type, answ
     update_answer(question_location, answers, correct_answers)
 
 def change_question_with_answer(question_location, question, question_type, answers, correct_answers):
+    print(answers)
     exists = _execute_select(f'SELECT * FROM questions WHERE question_location = "{question_location}"')
     if (exists):
         return update_question_with_answer(question_location, question, question_type, answers, correct_answers)
@@ -123,3 +130,7 @@ def select_result_amount_for(user_id):
     for values in results:
         score += values[3]
     return score, len(results)
+
+if __name__ == '__main__':
+    #_execute_query("DELETE FROM answers")
+    print(select_answer("6ICT"))

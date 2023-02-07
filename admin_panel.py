@@ -24,14 +24,6 @@ class VragenPagina(Pagina):
    def __init__(self, *args, **kwargs):
         Pagina.__init__(self, *args, **kwargs)
 
-        vraag_namen = {"vraag1", "vraag2"}
-        vragen = {"vraag1": "Ja?", "vraag2": "Nee?"}
-        antwoorden = {"vraag1": {"antw1": (True, "juist antwoord"), 
-        "antw2": (False, "nee eing ni"), "antw3": (False, "ma echt"), 
-        "antw4": (False, "")}, "vraag2": {"antw1": (False, "niet juist antwoord"), 
-        "antw2": (False, "nee eing ni"), "antw3": (True, "ma echt"), 
-        "antw4": (False, "a")}}
-
         geselecteerde_vraag = StringVar(self)
         geselecteerde_vraag.set("Selecteer een vraag")
 
@@ -47,35 +39,42 @@ class VragenPagina(Pagina):
             if check4.get():
                 correcte_answers_string += "4"
             antwoorden = ",".join([antwoord1.get(), antwoord2.get(), antwoord3.get(), antwoord4.get()])
-            database.insert_question_with_answer(vraag_entry.get(), type, vraag_naam.get(), antwoorden, correcte_answers_string)
+            database.change_question_with_answer(vraag_naam.get(), vraag_entry.get(), type, antwoorden, correcte_answers_string)
 
         def vraag_selecteer(vraag):
+            print(vraag)
+            question = database.select_question(vraag)
+            answers = database.select_answer(vraag)
+            print(answers)
+            answers_texts = answers[1].split(",")
+            correcte_antwoorden = answers[3]
+
             vraag_naam.delete(0, END)
             vraag_naam.insert(0, vraag)
 
             vraag_entry.delete(0, END)
-            vraag_entry.insert(0, vragen.get(vraag))
+            vraag_entry.insert(0, question[1])
 
             antwoord1.delete(0, END)
-            antwoord1.insert(0, antwoorden.get(vraag).get("antw1")[1])
-            antwoord1_checkbox.select() if antwoorden.get(vraag).get("antw1")[0] else antwoord1_checkbox.deselect()
+            antwoord1.insert(0, answers_texts[0])
+            antwoord1_checkbox.select() if "1" in correcte_antwoorden else antwoord1_checkbox.deselect()
 
             antwoord2.delete(0, END)
-            antwoord2.insert(0, antwoorden.get(vraag).get("antw2")[1])
-            antwoord2_checkbox.select() if antwoorden.get(vraag).get("antw2")[0] else antwoord2_checkbox.deselect()
+            antwoord2.insert(0, answers_texts[1])
+            antwoord2_checkbox.select() if "2" in correcte_antwoorden else antwoord2_checkbox.deselect()
 
             antwoord3.delete(0, END)
-            antwoord3.insert(0, antwoorden.get(vraag).get("antw3")[1])
-            antwoord3_checkbox.select() if antwoorden.get(vraag).get("antw3")[0] else antwoord3_checkbox.deselect()
+            antwoord3.insert(0, answers_texts[2])
+            antwoord3_checkbox.select() if "3" in correcte_antwoorden else antwoord3_checkbox.deselect()
 
             antwoord4.delete(0, END)
-            antwoord4.insert(0, antwoorden.get(vraag).get("antw4")[1])
-            antwoord4_checkbox.select() if antwoorden.get(vraag).get("antw4")[0] else antwoord4_checkbox.deselect()
+            antwoord4.insert(0, answers_texts[3])
+            antwoord4_checkbox.select() if "4" in correcte_antwoorden else antwoord4_checkbox.deselect()
 
             geselecteerde_vraag.set(vraag)
         
         def vraag_delete():
-            vraag_namen.remove(vraag_naam.get())
+            database.remove_question_and_answer(vraag_naam.get())
             vraag_naam.delete(0, END)
             vraag_entry.delete(0, END)
 
@@ -96,26 +95,25 @@ class VragenPagina(Pagina):
 
         def maak_vraag():
             creer_nieuwe_vraag()
-            vraag_namen.add(vraag_naam.get())
             geselecteerde_vraag.set(vraag_naam.get())
-
-            vragen[vraag_naam.get()] = vraag_entry.get()
-
-            antwoorden[vraag_naam.get()] = {"antw1": (check1.get(), antwoord1.get()),
-                "antw2": (check2.get(), antwoord2.get()),
-                "antw3": (check3.get(), antwoord3.get()),
-                "antw4": (check4.get(), antwoord4.get())}
-
             updateMenu()
 
         def updateMenu():
             menu = selecteer_vraag["menu"]
             menu.delete(0, "end")
-            for string in vraag_namen:
+            questions = database.select_all_questions()
+            question_names = [question[3] for question in questions]
+            for string in question_names:
                 menu.add_command(label=string, command=lambda value=string: vraag_selecteer(value))
 
+        questions = database.select_all_questions()
+        question_names = [question[3] for question in questions]
+
+        if (len(question_names) == 0):
+            question_names = [""]
+
         #selecteer vraag menu
-        selecteer_vraag = OptionMenu(self, geselecteerde_vraag, *vraag_namen, command=vraag_selecteer)
+        selecteer_vraag = OptionMenu(self, geselecteerde_vraag, *question_names, command=vraag_selecteer)
         selecteer_vraag.configure(bd = 1, indicatoron=0, height=2, width=20)
         selecteer_vraag.place(relx=0.05, rely=0.175)
 
