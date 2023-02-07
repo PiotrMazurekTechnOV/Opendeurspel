@@ -96,6 +96,22 @@ class VragenPagina(Pagina):
         def maak_vraag():
             creer_nieuwe_vraag()
             geselecteerde_vraag.set(vraag_naam.get())
+            vraag_naam.delete(0, END)
+            vraag_entry.delete(0, END)
+
+            antwoord1.delete(0, END)
+            antwoord1_checkbox.deselect()
+
+            antwoord2.delete(0, END)
+            antwoord2_checkbox.deselect()
+
+            antwoord3.delete(0, END)
+            antwoord3_checkbox.deselect()
+
+            antwoord4.delete(0, END)
+            antwoord4_checkbox.deselect()
+
+            geselecteerde_vraag.set("Selecteer een vraag")
             updateMenu()
 
         def updateMenu():
