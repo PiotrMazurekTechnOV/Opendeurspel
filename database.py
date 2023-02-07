@@ -1,149 +1,125 @@
 import mysql.connector
 
 
-remote_connect = mysql.connector.connect(
-  host="192.168.125.2",
-  user= "opendeur",
-  passwd="opendeur",
-  database="database_opendeurdag",)
-
-my_conn = remote_connect.cursor(buffered=True)
-
-
-def my_connect_database_opendeurdag():
-  return remote_connect;
-
-def my_conn_database_opendeurdag():
- return remote_connect;
-
-
-def better_string(string):
-  string = str(string).replace(',', '').replace('(', '').replace(')', '').replace("'", '').replace('{', '').replace('}', '').replace( '[', '').replace(']', '')
-  return string;
-
-def select_users(data , IDin):
-    remote_connect.execute(("SELECT " + data+ " FROM  users WHERE ID = %s"), (IDin,))
-    sel = remote_connect.fetchone()
-    remote_connect.commit()
-    sel = better_string(sel)
-    my_conn.close()
-    remote_connect.close()
-    return sel;
-def select_answer(data, IDin):
-    remote_connect.execute(("SELECT " + data + " FROM answer WHERE ID = %s"), (IDin,))
-    sel = remote_connect.fetchone()
-    remote_connect.commit()
-    sel = better_string(sel)
-    my_conn.close()
-    remote_connect.close()
-    return sel;
-def select_quesions(data,IDin):
-    my_conn.execute(("SELECT" +data + " FROM questions WHERE ID = %s"), (IDin,))
-    sel = remote_connect.fetchone()
-    remote_connect.commit()
-    sel = better_string(sel)
-    my_conn.close()
-    remote_connect.close()
-    return sel;
-def select_results(data, IDin):
-    my_conn.execute(("SELECT " + data + " FROM results WHERE ID = %s"), (IDin,))
-    sel = remote_connect.fetchone()
-    remote_connect.commit()
-    sel = better_string(sel)
-    my_conn.close()
-    remote_connect.close()
-    return sel;
-
-def count_true_results( IDin):
-    my_conn.execute(("SELECT COUNT( result ) FROM result WHERE result = true,ID= %s"),(IDin,))
-    sel = remote_connect.fetchone()
-    remote_connect.commit()
-    sel = better_string(sel)
-    my_conn.close()
-    remote_connect.close()
-    return sel;
-
-
-#invoeren van een resultaat op een gestelde vraag
-def insert_result(user_id, question_id , result):
-
-
-    sql = "INSERT INTO result (questions_id, users_id,result) VALUES (%s, %s,%s)"
-    val = (user_id, question_id,result )
-    my_conn.execute(sql, val)
-    remote_connect.commit()
-    my_conn.close()
-    remote_connect.close()
-
-
-
-def insert_question(question,multy,clas):
-
-
-    sql = "INSERT INTO questions (question,multy,clas) VALUES (%s,%s,%s)"
-    val = (question,multy,clas)
-    my_conn.execute(sql, val)
-
-    remote_connect.commit()
-    my_conn.close()
-    remote_connect.close()
-
-
-def insert_answers(answer, questions_id, correct, possible):
-    sql = "INSERT INTO answers (answer, questions_id, correct, possible) VALUES (%s, %s,%s)"
-    val = (answer, questions_id, correct, possible)
-    my_conn.execute(sql, val)
-    my_conn.close()
-    remote_connect.close()
-
-
-
-
-def update_questions(question,multy,clas):
-    sql = 'UPDATE questions SET question = '+question+', multy = '+multy+ ', clas = '+clas+''
+def connect_to_db():
     try:
-        # Execute the SQL command
-        my_conn.execute(sql)
+        mydb = mysql.connector.connect(
+            host="192.168.125.2",
+            user="opendeur",
+            password ="opendeur",
+            database ="opendeurspel",
+            auth_plugin='mysql_native_password'
+        )
+    
 
-        # Commit your changes in the database
-        remote_connect.commit()
-    except:
+        cursor = mydb.cursor(buffered=True)
+        return mydb, cursor
+    except mysql.connector.Error as error:
+        print(error)
 
-        remote_connect.rollback()
-    sql = '''SELECT * from questions'''
-    my_conn.execute(sql)
-    print(remote_connect.fetchall())
-    my_conn.close()
-    remote_connect.close()
-def insert_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
-
-
-
-    sql = "INSERT INTO user (name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    val = (name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code)
-    my_conn.execute(sql, val)
-    my_conn.close()
-    remote_connect.close()
-
-def update_users(name,last_name,email_address,email_child,age_child,direction,contact,phone_number,code):
-    sql = 'UPDATE  user SET name = ' + name + ', last_name = ' + last_name + ', email_address= ' + email_address + 'email_child ='+email_child+'age_child = '+age_child+ 'direction='+direction+'contact ='+contact+'phone_number ='+phone_number+ 'code ='+code+ ''
+def _execute_query(query):
     try:
-        # Execute the SQL command
-        my_conn.execute(sql)
+        mydb, cursor = connect_to_db()
+        if(mydb and cursor):
+            cursor.execute(query)
+            mydb.commit()
+            cursor.close()
+            mydb.close()
+        else:
+            print("connection failed")
+    except mysql.connector.Error as error:
+        print(error)
 
-        # Commit your changes in the database
-        remote_connect.commit()
-    except:
+def _execute_select(query, many = False):
+    try:
+        mydb, cursor = connect_to_db()
+        if(mydb and cursor):
+            cursor.execute(query)
+            if(many):
+                records = cursor.fetchall()
+            else:
+                records = cursor.fetchone()
+            cursor.close()
+            mydb.close()
+            return records
+        else:
+            print("connection failed")
+    except mysql.connector.Error as error:
+        print(error)    
 
-        remote_connect.rollback()
-    sql = '''SELECT * from user'''
-    my_conn.execute(sql)
-    print(remote_connect.fetchall())
-    my_conn.close()
-    remote_connect.close()
+
+#   USERS
+
+def _generate_user_id(name, last_name):
+    user_id = name[0] + last_name[0]
+    codeId = 0
+    while select_user_by_user_id(user_id + str(codeId)) != None:
+        codeId += 1
+    return user_id + str(codeId)
+
+def insert_user(name, last_name, email_address, email_child, age_child, direction, contact, phone_number):
+    user_id = _generate_user_id(name, last_name)
+    _execute_query(
+        f'INSERT INTO users (name, last_name, email_address, email_child, age_child, direction, contact, phone_number, user_id) VALUES ("{name}", "{last_name}", "{email_address}", "{email_child}", {age_child}, "{direction}", {contact}, {phone_number}, "{user_id}")')
+
+def select_user_by_user_id(user_id):
+    user = _execute_select(f'SELECT * FROM users WHERE user_id = "{user_id}"')
+    return user
 
 
-print(select_users('*', 'users', 1))
-print(('*', 'users', 1))
+#   QUESTIONS
+
+def insert_question(question_location, question, question_type):
+    _execute_query(f'INSERT INTO questions (question_location, question, question_type) VALUES ("{question_location}", "{question}", {question_type})')
+
+def select_question(question_location):
+    return _execute_select(f'SELECT * FROM questions WHERE question_location = "{question_location}"')
+
+def update_question(question_location, question, question_type):
+    _execute_query(f'UPDATE questions SET question={question}, question_type={question_type} WHERE question_location={question_location}')
+
+## ANSWERS
+
+def insert_answer(question_location, answers, correct_answers):
+    _execute_query(f'INSERT INTO answers (question_location, answers, correct_answers) VALUES ("{question_location}", "{answers}", "{correct_answers}")')
+
+def select_answer(question_location):
+    return _execute_select(f"SELECT * FROM answers WHERE question_location = '{question_location}'")
+
+def update_answer(question_location, answers, correct_answers):
+    _execute_query(f'UPDATE questions SET answers={answers}, correct_answers={correct_answers} WHERE question_location={question_location}')
+
+##  ANSWERS + QUESTIONS
+
+def insert_question_with_answer(question_location, question, question_type, answers, correct_answers):
+    insert_question(question_location, question, question_type)
+    insert_answer(question_location, answers, correct_answers)
+
+def update_question_with_answer(question_location, question, question_type, answers, correct_answers):
+    update_question(question_location, question, question_type)
+    update_answer(question_location, answers, correct_answers)
+
+def change_question_with_answer(question_location, question, question_type, answers, correct_answers):
+    exists = _execute_select(f'SELECT * FROM questions WHERE question_location = "{question_location}"')
+    if (exists):
+        return update_question_with_answer(question_location, question, question_type, answers, correct_answers)
+    insert_question_with_answer(question_location, question, question_type, answers, correct_answers)
+
+def remove_question_and_answer(question_location):
+    _execute_query(f'DELETE FROM questions WHERE question_location= "{question_location}"')
+    _execute_query(f'DELETE FROM answers WHERE question_location= "{question_location}"')
 
 
+## RESULTS
+
+def insert_result(user_id, question_id, result):
+    exists = _execute_select(f'SELECT * FROM results WHERE user_id="{user_id}" AND question_id="{question_id}"')
+    if (not exists):
+        _execute_query(f'INSERT INTO results (user_id, question_id, result) VALUES ("{user_id}", "{question_id}", "{result}")')
+
+def select_result_amount_for(user_id):
+    results = _execute_select(f'SELECT * FROM results WHERE user_id="{user_id}"', True)
+    score = 0
+    for values in results:
+        score += values[3]
+    return score, len(results)
