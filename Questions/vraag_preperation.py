@@ -16,11 +16,13 @@ if vraagKeuze == 4:
         klas = textbox.get("1.0", "end-1c")  # For line 1, col 0 to end.
         print(klas)
         idk = db.select_question(klas)
+        idkk = db.select_answer(klas)
 
         type = idk[2]
         vraag = idk[1]
-        antwoorden = 
-        resultaten = 
+        antwoorden = idkk[1]
+        resultaten = idkk[3]
+        print(resultaten)
 
         #database compare klas met ID en vraag de soort
         vraagKeuze = int(type)

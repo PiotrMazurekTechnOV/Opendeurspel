@@ -1,4 +1,5 @@
 import tkinter as tk
+import re
 
 ## Option_a_check is niet zichtbaar voor check en is dus niet bruikbaar op lijn 45-50 
 ## Zie benden!
@@ -24,7 +25,8 @@ def SetUp(vraag, resultaten, antwoorden):
             self.option_d = tk.StringVar()
             self.option_d.set("Green")
             
-            self.correct_answers = resultaten.split(separator=",")
+            if re.search(",",resultaten) != None:
+                self.correct_answers = resultaten.split(separator=",")
             self.correct_answers.append(None)
             #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
             self.create_widgets()
