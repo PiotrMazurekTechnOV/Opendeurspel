@@ -46,4 +46,22 @@ def _execute_select(query, many = False):
         print(error)    
 
 
+def insert_user():
+    _execute_query("")
+
+
+def select_user_by_code(code):
+    user = _execute_select("")
+    return user
+
+
+def insert_question():
+    _execute_query("")
+
+
+
+
+
+
+
 
