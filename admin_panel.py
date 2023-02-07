@@ -2,7 +2,17 @@ from tkinter import *
 from tkinter import ttk
 from PIL import *
 from PIL import ImageTk, Image
-    
+import database
+
+from enum import Enum
+
+class QuestionType(Enum):
+    OPEN_VRAAG = 0
+    MULTIPLE_CHOICE = 2     
+    PICK_ONE = 1
+
+#database.insert_user('test','test','test','test','test','test','test','test','test')
+
 
 class Pagina(Frame):
     def __init__(self, *args, **kwargs):
@@ -24,6 +34,20 @@ class VragenPagina(Pagina):
 
         geselecteerde_vraag = StringVar(self)
         geselecteerde_vraag.set("Selecteer een vraag")
+
+        def creer_nieuwe_vraag():
+            type = QuestionType.OPEN_VRAAG.value
+            correcte_answers_string = ""
+            if check1.get():
+                correcte_answers_string += "1,"
+            if check2.get():
+                correcte_answers_string += "2,"
+            if check3.get():
+                correcte_answers_string += "3,"
+            if check4.get():
+                correcte_answers_string += "4"
+            antwoorden = ",".join([antwoord1.get(), antwoord2.get(), antwoord3.get(), antwoord4.get()])
+            database.insert_question_with_answer(vraag_entry.get(), type, vraag_naam.get(), antwoorden, correcte_answers_string)
 
         def vraag_selecteer(vraag):
             vraag_naam.delete(0, END)
@@ -71,6 +95,7 @@ class VragenPagina(Pagina):
             updateMenu()
 
         def maak_vraag():
+            creer_nieuwe_vraag()
             vraag_namen.add(vraag_naam.get())
             geselecteerde_vraag.set(vraag_naam.get())
 

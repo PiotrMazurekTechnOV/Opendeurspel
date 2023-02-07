@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import *
 from PIL import ImageTk, Image
-#import mysql.connector
+import database
 import re
 
 import os
@@ -9,7 +9,6 @@ import subprocess
 
 from keyboard_new import KeyboardEntry
 
-#from database_gip import *
 
 #import pyglet
 #pyglet.font.add_file('Gilroy-Light.otf')
@@ -143,7 +142,8 @@ class GegevensPagina(Pagina):
         #gegevens_naam.bind("<FocusIn>", lambda: gegevens_naam.delete(1.0, END))
         email_ouders_entry.place(relx=oXE, rely=oYES + oY * 3, anchor=CENTER, height=height, width=150)
 
-        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", font=font)
+        contact_allowed_var = BooleanVar()
+        contact_box = Checkbutton(self, text="Wilt u door ons gecontacteerd worden?", font=font, variable=contact_allowed_var)
         contact_box.place(relx=0.5, rely=0.8, anchor=CENTER)
 
         #cntctbox.bind('<<ListBoxSelect>>', okbutton)
@@ -157,13 +157,15 @@ class GegevensPagina(Pagina):
             naam_ouder = ouder_entry.entry.get()
             email_kind = email_kind_entry.entry.get()
             email_ouder = email_ouders_entry.entry.get()
-            contact_value = contact_box.instate(['selected'])
+            contact_value = contact_allowed_var.get()
+            studierighting_value = studierighting.get()
 
             ##### check e-mail
 
             if(True): #(re.fullmatch(email_regex, email_kind))and(re.fullmatch(email_regex, email_ouder)) and leeftijd.isnumeric() and telefoonnummer.isnumeric():
 
                 ##SEND TO DATABASE
+                database.insert_users(naam, achternaam, email_ouder, email_kind, leeftijd, studierighting_value, contact_value, telefoonnummer, "NOT IMPLEMENTED")
 
                 #klaarbutton.place_forget()
                 #emailfout.place_forget()
