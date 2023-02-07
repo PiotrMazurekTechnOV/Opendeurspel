@@ -15,11 +15,12 @@ if vraagKeuze == 4:
     def submit():  # Callback function for SUBMIT Button
         klas = textbox.get("1.0", "end-1c")  # For line 1, col 0 to end.
         print(klas)
-        type = db.select_question_type(klas)
-        print(type)
-        vraag = db.select_question_text(klas)
-        antwoorden = db.select_answer(klas)
-        resultaten = db.se
+        idk = db.select_question(klas)
+
+        type = idk[2]
+        vraag = idk[1]
+        antwoorden = 
+        resultaten = 
 
         #database compare klas met ID en vraag de soort
         vraagKeuze = int(type)
