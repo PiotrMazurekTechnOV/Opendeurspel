@@ -79,3 +79,5 @@ def SetUp(vraag, resultaten, antwoorden):
 
     quiz = Quiz()
     quiz.mainloop()
+
+SetUp("Klas?","1","Nee,Ja,Mischien")

@@ -39,7 +39,6 @@ def submit():  # Callback function for SUBMIT Button
             vraag1_openVraag.SetUp()
     elif vraagKeuze == 1:
             print("1")
-            main.destroy()
             vraag2_multipleChoise.SetUp(vraag,resultaten,antwoorden)
     elif vraagKeuze == 2:
             print("2")
