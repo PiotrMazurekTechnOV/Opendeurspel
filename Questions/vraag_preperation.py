@@ -25,7 +25,11 @@ if vraagKeuze == 4:
         print(resultaten)
 
         #database compare klas met ID en vraag de soort
+<<<<<<< Updated upstream
         vraagKeuze = int(type)
+=======
+        vraagKeuze = 0
+>>>>>>> Stashed changes
 
 
         if vraagKeuze == 0:
