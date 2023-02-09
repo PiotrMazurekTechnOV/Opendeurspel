@@ -25,7 +25,7 @@ if vraagKeuze == 4:
         print(resultaten)
 
         #database compare klas met ID en vraag de soort
-        vraagKeuze = 0
+        vraagKeuze = int(type)
 
 
         if vraagKeuze == 0:
