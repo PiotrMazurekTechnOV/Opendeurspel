@@ -57,7 +57,7 @@ def _generate_user_id(name, last_name):
         codeId += 1
     return user_id + str(codeId)
 
-def insert_user(name, last_name, email_address, email_child, age_child, direction, contact, phone_number):
+def insert_user(name: str, last_name: str, email_address: str, email_child: str, age_child: int, direction: str, contact: bool, phone_number: int):
     user_id = _generate_user_id(name, last_name)
     _execute_query(
         f'INSERT INTO users (name, last_name, email_address, email_child, age_child, direction, contact, phone_number, user_id) VALUES ("{name}", "{last_name}", "{email_address}", "{email_child}", {age_child}, "{direction}", {contact}, {phone_number}, "{user_id}")')
@@ -69,7 +69,7 @@ def select_user_by_user_id(user_id: str):
 
 #   QUESTIONS
 
-def insert_question(question_location: str, question, question_type):
+def insert_question(question_location: str, question: str, question_type: int):
     _execute_query(f'INSERT INTO questions (question_location, question, question_type) VALUES ("{question_location}", "{question}", {question_type})')
 
 def select_question(question_location: str):
@@ -101,7 +101,7 @@ def insert_question_with_answer(question_location: str, question: str, question_
     insert_question(question_location, question, question_type)
     insert_answer(question_location, answers, correct_answers)
 
-def update_question_with_answer(question_location, question, question_type, answers, correct_answers):
+def update_question_with_answer(question_location: str, question: str, question_type: int, answers: str, correct_answers: str):
     update_question(question_location, question, question_type)
     update_answer(question_location, answers, correct_answers)
 
