@@ -24,7 +24,7 @@ def submit():  # Callback function for SUBMIT Button
     #database compare klas met ID en vraag de soort
     vraag = str(vraag)
     print(vraag)
-    vraagKeuze = int(type)
+    vraagKeuze = str(type)
     print(vraagKeuze)
     antwoorden = str(antwoorden)
     print(antwoorden)

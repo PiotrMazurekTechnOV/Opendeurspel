@@ -27,7 +27,6 @@ def SetUp(vraag, resultaten, antwoorden):
             
             if re.search(",",resultaten) != None:
                 self.correct_answers = resultaten.split(separator=",")
-            self.correct_answers.append(None)
             #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
             self.create_widgets()
 
