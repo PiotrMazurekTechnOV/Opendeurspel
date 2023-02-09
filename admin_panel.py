@@ -27,8 +27,14 @@ class VragenPagina(Pagina):
         geselecteerde_vraag = StringVar(self)
         geselecteerde_vraag.set("Selecteer een vraag")
 
+        welkom = Label(self, text = "Welkom op het admin paneel!", font=("Gilroy Light", 25))
+        welkom.place(relx=0.45, rely=0.035, anchor=N)
+
         def creer_nieuwe_vraag():
             type = QuestionType.OPEN_VRAAG.value
+            if (antwoord2.get() == "" and antwoord3.get() == "" and antwoord4.get() == ""):
+                type = QuestionType.OPEN_VRAAG.value
+            
             correcte_answers_string = ""
             if check1.get():
                 correcte_answers_string += "1,"
@@ -37,7 +43,11 @@ class VragenPagina(Pagina):
             if check3.get():
                 correcte_answers_string += "3,"
             if check4.get():
-                correcte_answers_string += "4"
+                correcte_answers_string += "4,"
+            if (len(correcte_answers_string) > 2):
+                type = QuestionType.MULTIPLE_CHOICE.value
+            else:
+                type = QuestionType.PICK_ONE.value
             antwoorden = ",".join([antwoord1.get(), antwoord2.get(), antwoord3.get(), antwoord4.get()])
             database.change_question_with_answer(vraag_naam.get(), vraag_entry.get(), type, antwoorden, correcte_answers_string)
 
@@ -126,100 +136,96 @@ class VragenPagina(Pagina):
         question_names = [question[3] for question in questions]
 
         if (len(question_names) == 0):
-            question_names = [""]
+            question_names = ["Geen vragen gevonden"]
 
         #selecteer vraag menu
         selecteer_vraag = OptionMenu(self, geselecteerde_vraag, *question_names, command=vraag_selecteer)
         selecteer_vraag.configure(bd = 1, indicatoron=0, height=2, width=20)
-        selecteer_vraag.place(relx=0.05, rely=0.175)
+        selecteer_vraag.place(relx=0.4, rely=0.275)
 
         #vraag aanmaak knop
         maak_vraag = Button(self, text="Creer nieuwe vraag", command=maak_vraag)
-        maak_vraag.place(relx=0.05, rely=0.05)
+        maak_vraag.place(relx=0.4, rely=0.15)
 
         #vraag naam text
         vraag_naam = Entry(self)
-        vraag_naam.place(relx=0.05, rely=0.14)
+        vraag_naam.place(relx=0.4, rely=0.24)
+
+        vraag_naam_label = Label(self, text="Klas naam:")
+        vraag_naam_label.place(relx=0.35, rely=0.24)
 
         #vraag delete knop
         delete_vraag = Button(self, text="Verwijder vraag", command=vraag_delete)
-        delete_vraag.place(relx=0.05, rely=0.09)
+        delete_vraag.place(relx=0.4, rely=0.19)
 
         #vraag text
         vraag_entry = Entry(self)
-        vraag_entry.place(relx=0.15, rely=0.14)
+        vraag_entry.place(relx=0.5, rely=0.24)
+
+        vraag_naam_label = Label(self, text="Vraag:")
+        vraag_naam_label.place(relx=0.5, rely=0.2)
 
         #antwoord1 text
         antwoord1 = Entry(self)
-        antwoord1.place(relx=0.05, rely=0.3)
+        antwoord1.place(relx=0.4, rely=0.4)
 
+        antwoord1_label = Label(self, text="Antwoord 1:")
+        antwoord1_label.place(relx=0.34, rely=0.4)
 
         #antwoord1 checkbox
         check1 = BooleanVar()
         antwoord1_checkbox = Checkbutton(self, text="Correct antwoord", variable=check1)
-        antwoord1_checkbox.place(relx=0.05, rely=0.35)
+        antwoord1_checkbox.place(relx=0.4, rely=0.45)
 
         #antwoord2 text
         antwoord2 = Entry(self)
-        antwoord2.place(relx=0.05, rely=0.4)
+        antwoord2.place(relx=0.4, rely=0.5)
+
+        antwoord2_label = Label(self, text="Antwoord 2:")
+        antwoord2_label.place(relx=0.34, rely=0.5)
 
         #antwoord2 checkbox
         check2 = BooleanVar()
         antwoord2_checkbox = Checkbutton(self, text="Correct antwoord", variable=check2)
-        antwoord2_checkbox.place(relx=0.05, rely=0.45)
+        antwoord2_checkbox.place(relx=0.4, rely=0.55)
 
         #antwoord3 text
         antwoord3 = Entry(self)
-        antwoord3.place(relx=0.05, rely=0.5)
+        antwoord3.place(relx=0.4, rely=0.6)
+
+        antwoord3_label = Label(self, text="Antwoord 3:")
+        antwoord3_label.place(relx=0.34, rely=0.6)
 
         #antwoord3 checkbox
         check3 = BooleanVar()
         antwoord3_checkbox = Checkbutton(self, text="Correct antwoord", variable=check3)
-        antwoord3_checkbox.place(relx=0.05, rely=0.55)
+        antwoord3_checkbox.place(relx=0.4, rely=0.65)
 
         #antwoord4 text
         antwoord4 = Entry(self)
-        antwoord4.place(relx=0.05, rely=0.6)
+        antwoord4.place(relx=0.4, rely=0.7)
+
+        antwoord4_label = Label(self, text="Antwoord 4:")
+        antwoord4_label.place(relx=0.34, rely=0.7)
 
         #antwoord4 checkbox
         check4 = BooleanVar()
         antwoord4_checkbox = Checkbutton(self, text="Correct antwoord", variable=check4)
-        antwoord4_checkbox.place(relx=0.05, rely=0.65)
+        antwoord4_checkbox.place(relx=0.4, rely=0.75)
 
-     
-
-        
-
-
-
-class AntwoordenPagina(Pagina):
-   def __init__(self, *args, **kwargs):
-        Pagina.__init__(self, *args, **kwargs)
-        #canvas = Canvas(self, width="100c", height="100c", bg="#1b709d")
-        #canvas.pack()
-
-        #titel
-        welkom = Label(self, text = "Welkom op de opendeurdag van Technov!", fg="#1b709d", font=("Gilroy Light", 36))
-        welkom.place(relx=0.5, rely=0.05, anchor=N)
-
-        #uitleg
-        uitleg = Label(self, text = "Vul uw gegevens hier in, dan ontvangt u uw ID.", fg="#1b709d", font=("gilroy light", 24))
-        uitleg.place(relx=0.5, rely=0.2, anchor=N)
         
 
 class MainView(Frame):
     def __init__(self, *args, **kwargs):
         Frame.__init__(self, *args, **kwargs)
         p1 = VragenPagina(self)
-        p2 = AntwoordenPagina(self)
 
         buttonframe = Frame(self)
         container = Frame(self)
         buttonframe.pack(side="top", fill="x", expand=False)
         container.pack(side="top", fill="both", expand=True)
 
-        p1.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
-        p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)        
+        p1.place(in_=container, x=0, y=0, relwidth=1, relheight=1)     
 
         #b1 = Button(p2, text="Klaar!", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=p1.lift, activeforeground="#FFFFFF", activebackground="#1b709d")
         #b2 = Button(p1, text=" Start! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 30), relief= FLAT , command=p2.lift, activeforeground="#FFFFFF", activebackground="#1b709d")        
@@ -230,7 +236,7 @@ class MainView(Frame):
         #titel
         welkom = Label(self, text = "Admin panel"
                , fg="#1b709d", font=("Gilroy Light", 30))
-        welkom.place(relx=0.5, rely=0.05, anchor=N)
+        welkom.place(relx=0.4, rely=0.05, anchor=N)
 
         p1.show()
 
