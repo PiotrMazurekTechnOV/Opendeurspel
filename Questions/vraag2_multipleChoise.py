@@ -13,20 +13,29 @@ def SetUp(vraag, resultaten, antwoorden):
     class Quiz(tk.Tk):
         def __init__(self):
             super().__init__()
+
+            if re.search(",",antwoorden) != None:
+                self.answers = antwoorden.split(",")
+
             self.title("Quiz")
             self.question = tk.StringVar()
             self.question.set(vraag)
             self.option_a = tk.StringVar()
-            self.option_a.set("Red")
+            self.option_a.set(self.answers[0])
             self.option_b = tk.StringVar()
-            self.option_b.set("White")
+            self.option_b.set(self.answers[1])
             self.option_c = tk.StringVar()
-            self.option_c.set("Blue")
-            self.option_d = tk.StringVar()
-            self.option_d.set("Green")
+            self.option_c.set(self.answers[2])
+            try:
+                self.option_d = tk.StringVar()
+                self.option_d.set(self.answers[3])
+            except:
+                print("No Qeustion 4")
+                
+            
             
             if re.search(",",resultaten) != None:
-                self.correct_answers = resultaten.split(separator=",")
+                self.correct_answers = resultaten.split(",")
             #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
             self.create_widgets()
 
