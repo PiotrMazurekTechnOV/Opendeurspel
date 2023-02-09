@@ -14,13 +14,9 @@ from tkinter import *
         #De SetUp code voor choose
         ##Er moet nog de database code hier in komen.
 
-def SetUp():
+def SetUp(vraag, correctAnswer, antwoorden):
     import tkinter as tk
     import os
-
-    vraag = "What is the capital of France?"
-    antwoorden = "Paris,Londen,Berlin,Rome"
-    correctAnswer = "a"
 
     antwoordeLijst = antwoorden.split(',')
     print(antwoordeLijst)
