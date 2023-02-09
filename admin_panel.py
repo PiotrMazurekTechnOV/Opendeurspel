@@ -147,6 +147,10 @@ class VragenPagina(Pagina):
         maak_vraag = Button(self, text="Creer nieuwe vraag", command=maak_vraag)
         maak_vraag.place(relx=0.4, rely=0.15)
 
+        #vraag delete knop
+        delete_vraag = Button(self, text="Verwijder vraag", command=vraag_delete)
+        delete_vraag.place(relx=0.4, rely=0.19)
+
         #vraag naam text
         vraag_naam = Entry(self)
         vraag_naam.place(relx=0.4, rely=0.24)
@@ -154,19 +158,15 @@ class VragenPagina(Pagina):
         vraag_naam_label = Label(self, text="Klas naam:")
         vraag_naam_label.place(relx=0.35, rely=0.24)
 
-        #vraag delete knop
-        delete_vraag = Button(self, text="Verwijder vraag", command=vraag_delete)
-        delete_vraag.place(relx=0.4, rely=0.19)
-
         #vraag text
-        vraag_entry = Entry(self)
+        vraag_entry = Entry(self, width=75)
         vraag_entry.place(relx=0.5, rely=0.24)
 
         vraag_naam_label = Label(self, text="Vraag:")
         vraag_naam_label.place(relx=0.5, rely=0.2)
 
         #antwoord1 text
-        antwoord1 = Entry(self)
+        antwoord1 = Entry(self, width=75)
         antwoord1.place(relx=0.4, rely=0.4)
 
         antwoord1_label = Label(self, text="Antwoord 1:")
@@ -178,7 +178,7 @@ class VragenPagina(Pagina):
         antwoord1_checkbox.place(relx=0.4, rely=0.45)
 
         #antwoord2 text
-        antwoord2 = Entry(self)
+        antwoord2 = Entry(self, width=75)
         antwoord2.place(relx=0.4, rely=0.5)
 
         antwoord2_label = Label(self, text="Antwoord 2:")
@@ -190,7 +190,7 @@ class VragenPagina(Pagina):
         antwoord2_checkbox.place(relx=0.4, rely=0.55)
 
         #antwoord3 text
-        antwoord3 = Entry(self)
+        antwoord3 = Entry(self, width=75)
         antwoord3.place(relx=0.4, rely=0.6)
 
         antwoord3_label = Label(self, text="Antwoord 3:")
@@ -202,7 +202,7 @@ class VragenPagina(Pagina):
         antwoord3_checkbox.place(relx=0.4, rely=0.65)
 
         #antwoord4 text
-        antwoord4 = Entry(self)
+        antwoord4 = Entry(self, width=75)
         antwoord4.place(relx=0.4, rely=0.7)
 
         antwoord4_label = Label(self, text="Antwoord 4:")
