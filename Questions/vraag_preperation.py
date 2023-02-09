@@ -4,7 +4,6 @@ import vraag3_choose
 from tkinter import *
 import database as db
 
-
 main = Tk()
 
 width = 600
@@ -36,14 +35,14 @@ def submit():  # Callback function for SUBMIT Button
     if vraagKeuze == 0:
             print("0")
             main.destroy()
-            vraag1_openVraag.SetUp()
+            vraag1_openVraag.SetUp(vraag,resultaten)
     elif vraagKeuze == 1:
             print("1")
             vraag2_multipleChoise.SetUp(vraag,resultaten,antwoorden)
     elif vraagKeuze == 2:
             print("2")
             main.destroy()
-            vraag3_choose.SetUp()
+            vraag3_choose.SetUp(vraag,resultaten,antwoorden)
             
 c = Canvas(main, width=width, height=height, highlightthickness=0)
 c.pack()
