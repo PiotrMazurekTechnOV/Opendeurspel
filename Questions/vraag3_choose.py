@@ -22,14 +22,15 @@ def SetUp(vraag, correctAnswer, antwoorden):
     print(antwoordeLijst)
 
     aAntwoord = antwoordeLijst[0]
-    bAntwoord = antwoordeLijst[1]
-    cAntwoord = antwoordeLijst[2]
-    dAntwoord = antwoordeLijst[3]
-
     print(aAntwoord)
+    bAntwoord = antwoordeLijst[1]
     print(bAntwoord)
-    print(cAntwoord)
-    print(dAntwoord)
+    if len(antwoordeLijst) > 2:
+        cAntwoord = antwoordeLijst[2]
+        print(cAntwoord)
+    if len(antwoordeLijst) > 3:
+        dAntwoord = antwoordeLijst[3]
+        print(dAntwoord)
 
     class Quiz(tk.Tk):
         def __init__(self):
@@ -41,10 +42,12 @@ def SetUp(vraag, correctAnswer, antwoorden):
             self.option_a.set(aAntwoord)
             self.option_b = tk.StringVar()
             self.option_b.set(bAntwoord)
-            self.option_c = tk.StringVar()
-            self.option_c.set(cAntwoord)
-            self.option_d = tk.StringVar()
-            self.option_d.set(dAntwoord)
+            if len(antwoordeLijst) > 2:
+                self.option_c = tk.StringVar()
+                self.option_c.set(cAntwoord)
+            if len(antwoordeLijst) > 3:
+                self.option_d = tk.StringVar()
+                self.option_d.set(dAntwoord)
             self.correct_answer = correctAnswer
             self.v = tk.StringVar()
             self.create_widgets()
@@ -56,10 +59,12 @@ def SetUp(vraag, correctAnswer, antwoorden):
             option_a_button.pack()
             option_b_button = tk.Radiobutton(self, textvariable=self.option_b, value="b", variable = self.v, command=self.check_answer)
             option_b_button.pack()
-            option_c_button = tk.Radiobutton(self, textvariable=self.option_c, value="c", variable = self.v, command=self.check_answer)
-            option_c_button.pack()
-            option_d_button = tk.Radiobutton(self, textvariable=self.option_d, value="d", variable = self.v, command=self.check_answer)
-            option_d_button.pack()
+            if len(antwoordeLijst) > 2:
+                option_c_button = tk.Radiobutton(self, textvariable=self.option_c, value="c", variable = self.v, command=self.check_answer)
+                option_c_button.pack()
+            if len(antwoordeLijst) > 3:
+                option_d_button = tk.Radiobutton(self, textvariable=self.option_d, value="d", variable = self.v, command=self.check_answer)
+                option_d_button.pack()
 
         def check_answer(self):
             if self.correct_answer == self.v.get():
