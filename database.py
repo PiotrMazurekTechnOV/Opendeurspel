@@ -4,14 +4,12 @@ import mysql.connector
 def connect_to_db():
     try:
         mydb = mysql.connector.connect(
-            host="192.168.125.2",
-            user="opendeur",
-            password ="opendeur",
-            database ="opendeurspel",
-            auth_plugin='mysql_native_password'
+            host="sql7.freemysqlhosting.net", 
+            user= "sql7597227",
+            passwd="7x9Ssuvhlq",
+            database="sql7597227"
         )
     
-
         cursor = mydb.cursor(buffered=True)
         return mydb, cursor
     except mysql.connector.Error as error:
@@ -132,4 +130,4 @@ def select_result_amount_for(user_id: str):
 
 if __name__ == '__main__':
     #_execute_query("DELETE FROM answers")
-    print(select_answer("6ICT"))
+    pass
