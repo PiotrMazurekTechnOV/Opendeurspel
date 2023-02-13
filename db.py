@@ -9,7 +9,7 @@ def connect_to_db():
             password="7x9Ssuvhlq",  
             database="sql7597227")
 
-        cursor = mydb.cursor()
+        cursor = mydb.cursor(buffered=True)
         return mydb, cursor
     except mysql.connector.Error as error:
         print(error)
