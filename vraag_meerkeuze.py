@@ -7,7 +7,7 @@ import re
 class question():
     location = "ICT lokaal"
     question = "In welke taal is dit geschreven"
-    answers = ["Python", "C#", "Java"]
+    answers = ["Python", "C#", "Java", "C++"]
     
     
     
@@ -23,21 +23,23 @@ class Vraag(Pagina):
     def __init__(self, *args, **kwargs):
         Pagina.__init__(self, *args, **kwargs)
         qu = question()
+        rely_v = 0.35
           
         #titel
         location_label = Label(self, text = qu.location, fg="#1b709d", font=("Gilroy Light", 65))
         location_label.place(relx=0.5, rely=0.1, anchor=N)
         
-        vraag_label = Label(self, text ="Vraag: "+qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
-        vraag_label.place(relx=0.5, rely=0.25, anchor=N)
+        #button generation
+        for x in range(0, len(qu.answers)):
+            ans_name = "c" + str(x)
+            ans_var = "a" + str(x)
+            ans_var = IntVar()
+            ans_name = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1)
+            ans_name.place(relx=0.5, rely=rely_v, anchor=N)
+            rely_v = rely_v + 0.15
         
-        b1 = Button(self, text="Python", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",25), pady=50, width=10, height=1)
-        b2 = Button(self, text="C#", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",25), pady=50, width=10, height=1)
-        b3 = Button(self, text="Java", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",25), pady=50, width=10, height=1)
-        
-        b1.place(relx=0.5, rely=0.4, anchor=N)
-        b2.place(relx=0.5, rely=0.6, anchor=N)
-        b3.place(relx=0.5, rely=0.8, anchor=N)
+        vraag_label = Label(self, text ="Vraag: " + qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
+        vraag_label.place(relx=0.5, rely=0.20, anchor=N)
         
         
 
