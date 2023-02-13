@@ -1,7 +1,7 @@
 from PIL import *
 from tkinter import *
 from datetime import *
-import mysql.connector
+#import mysql.connector
 import os
 import pdfkit
 
@@ -66,11 +66,13 @@ def lgnbutton():
 def prntbutton():
     global naam, score, vorigenaam, vorigescore, vandaag
     file = open("indexGIP.html","r")
+    naam = 'test'
+    score = '10'
     new_file_content = ""
     for line in file:
         stripped_line = line.strip()
-        new_line = stripped_line.replace(vorigenaam, naam ).replace(vorigescore, score ).replace(vorigevr, aantvr )
-        new_file_content += new_line +"\n"
+        #new_line = stripped_line.replace(vorigenaam, naam ).replace(vorigescore, score ).replace(vorigevr, aantvr )
+        #new_file_content += new_line +"\n"
     file.close()
     file = open("indexGIP.html","w")
     file.write(new_file_content)
@@ -78,7 +80,7 @@ def prntbutton():
     options = { "enable-local-file-access": ""
                 }
     filename= naam+"_"+score+"_"+vandaag+'.pdf'
-    pdfkit.from_file('indexGIP.html', filename, configuration=pdfkit.configuration(wkhtmltopdf=b'C:\Program Files\wkhtmltopdf\\bin\wkhtmltopdf.exe'), options=options)
+    pdfkit.from_file('indexGIP.html', filename, configuration=pdfkit.configuration(wkhtmltopdf=b'C:\Users\ZbigniewSzypkowski\OneDrive - Katholiek Onderwijs Vilvoorde Machelen Diegem vzw\Documenten\GitHub\Opendeurspel\wkhtmltopdf.exe'), options=options)
     os.startfile(filename,"print")
     
         
@@ -108,7 +110,7 @@ loginbutton = Button(root, text='login', bg="#502E93", fg="#F9DEE3", font=("Cons
 loginbutton.place(relx=0.6, rely=0.5, anchor=CENTER)
 printbutton = Button(root, text='print diploma', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE
                      ,command=prntbutton)
-
+printbutton.place(relx=0.6, rely=0.5, anchor=CENTER)
 #maak label en ok button en plaats ze later
 hallo = Label(root,font = "Times")
 okbutton = Button(root, text='OK', bg="#502E93", fg="#F9DEE3", font=("Constantia",15),relief = GROOVE
@@ -161,15 +163,6 @@ text = '''
 '''
 file.write(text)
 file.close()
-
-#connecteer met database
-my_connect = mysql.connector.connect(
-  host="localhost",
-  user="extern", 
-  passwd="GIPFaraTom2022",
-  database="gip opendeuropdracht"
-)
-my_conn = my_connect.cursor()
 
 
 root.mainloop()
