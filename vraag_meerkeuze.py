@@ -5,7 +5,7 @@ import re
 
 
 class question():
-    location = "ICT lokaal"
+    location = "6ICT"
     question = "In welke taal is dit geschreven"
     answers = ["Python", "C#", "Java", "C++"]
     
