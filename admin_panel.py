@@ -1,7 +1,4 @@
 from tkinter import *
-from tkinter import ttk
-from PIL import *
-from PIL import ImageTk, Image
 import database
 
 from enum import Enum
@@ -10,9 +7,6 @@ class QuestionType(Enum):
     OPEN_VRAAG = 0
     MULTIPLE_CHOICE = 2     
     PICK_ONE = 1
-
-#database.insert_user('test','test','test','test','test','test','test','test','test')
-
 
 class Pagina(Frame):
     def __init__(self, *args, **kwargs):
@@ -247,7 +241,7 @@ if __name__ == "__main__":
     root.wm_geometry("400x400")
     root.state('zoomed')
     root.title("Admin panel")
-    root.iconbitmap('kovlogo.ico')
+    #root.iconbitmap('kovlogo.ico')
     #root.attributes('-fullscreen', True)
     root.mainloop()
 
