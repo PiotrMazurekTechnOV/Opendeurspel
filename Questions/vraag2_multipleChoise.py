@@ -30,7 +30,7 @@ def SetUp(vraag, resultaten, antwoorden):
                 self.option_d = tk.StringVar()
                 self.option_d.set(self.answers[3])
             except:
-                print("No Question 4")
+                print("No Qeustion 4")
                 
             
             
