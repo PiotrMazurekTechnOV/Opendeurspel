@@ -55,7 +55,7 @@ class GegevensPagina(Pagina):
 
         #uitleg
         uitleg = Label(self, text = "Vul uw gegevens hier in, dan ontvangt u uw ID.", fg="#1b709d", font=("gilroy light", 24))
-        uitleg.place(relx=0.5, rely=0.2, anchor=N)
+        uitleg.place(relx=0.5, rely=0.15, anchor=N)
 
         oXE = .32 #X entry offset
         oYES = 0.354 #Y entry start offset
@@ -71,6 +71,10 @@ class GegevensPagina(Pagina):
         oYES += .09
         oYLS += .09
         oY += .025
+
+        oYES -= .095
+        oYLS -= .095
+        #oY -= .025
 
         #voornaam
         naam_text = Label(self, text = "Voornaam:", fg="#1b709d", font=font)

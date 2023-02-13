@@ -36,7 +36,7 @@ class _PopupKeyboard(Toplevel):
         self.update_idletasks()
         self.geometry('{}x{}+{}+{}'.format(self.winfo_width(),
                                            self.winfo_height(),
-                                           self.x,self.y))
+                                           int(self.winfo_width()/2) - (keysize * 11) - 40, self.winfo_height())) #+ int(keyheight/4)))
         
     def _init_keys(self):
         self.row1 = Frame(self)
