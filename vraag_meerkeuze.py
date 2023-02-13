@@ -6,8 +6,8 @@ import re
 
 class question():
     location = "6ICT"
-    question = "In welke taal is dit geschreven"
-    answers = ["Python", "C#", "Java", "C++"]
+    question = "Welke programmeertaal wordt er gebruikt voor een Arduino te programmeren?”"
+    answers = ["C++", "C#", "Python"]
     
     
     
@@ -32,8 +32,6 @@ class Vraag(Pagina):
         #button generation
         for x in range(0, len(qu.answers)):
             ans_name = "c" + str(x)
-            ans_var = "a" + str(x)
-            ans_var = IntVar()
             ans_name = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1)
             ans_name.place(relx=0.5, rely=rely_v, anchor=N)
             rely_v = rely_v + 0.15
