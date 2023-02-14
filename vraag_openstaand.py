@@ -33,9 +33,30 @@ class Vraag(Pagina):
         vraag_label = Label(self, text ="Vraag: "+qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
         vraag_label.place(relx=0.5, rely=0.25, anchor=N)
         
-        ans_name = Button(self, text="Verstuur!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",30), pady=50, width=20, height=1)
-        ans_name.place(relx=0.5, rely=0.525, anchor=N)
         
+        naam_entry = KeyboardEntry(self, bd = 1, font=entry_font)
+        naam_entry.place(relx=0.5, rely=0.45, anchor=CENTER, height=85, width=1000)
+        
+class login_locatie(Pagina):
+    def __init__(self, *args, **kwargs):
+        Pagina.__init__(self, *args, **kwargs)
+        
+        entry_font = ("Gilroy Light", 45)
+        
+        vraag_label = Label(self, text ="Waar staat dit scherm?", fg="#1b709d", font=("gilroy light",35), pady=50)
+        vraag_label.place(relx=0.5, rely=0.25, anchor=N)
+        
+        naam_entry = KeyboardEntry(self, bd = 1, font=entry_font)
+        naam_entry.place(relx=0.5, rely=0.45, anchor=CENTER, height=85, width=1000)
+        
+class login_mensen(Pagina):
+    def __init__(self, *args, **kwargs):
+        Pagina.__init__(self, *args, **kwargs)
+        
+        entry_font = ("Gilroy Light", 45)
+        
+        vraag_label = Label(self, text ="Wat is je ID?", fg="#1b709d", font=("gilroy light",35), pady=50)
+        vraag_label.place(relx=0.5, rely=0.25, anchor=N)
         
         naam_entry = KeyboardEntry(self, bd = 1, font=entry_font)
         naam_entry.place(relx=0.5, rely=0.45, anchor=CENTER, height=85, width=1000)
@@ -44,7 +65,9 @@ class Vraag(Pagina):
 class MainView(Frame):
     def __init__(self, *args, **kwargs):
         Frame.__init__(self, *args, **kwargs)
-        p1 = Vraag(self)
+        p1 = login_locatie(self)
+        p2 = login_mensen(self)
+        p3 = Vraag(self)
 
         container = Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -62,7 +85,18 @@ class MainView(Frame):
         label1.image = kalspng
         label1.place(relx=0.81, rely=0.85)
         
-        p1.place(in_=container, x=0, y=0, relwidth=1, relheight=1)    
+        plaats_btn = Button(p1, text="Plaats", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",30), pady=50, width=20, height=1, command=p2.lift)
+        plaats_btn.place(relx=0.5, rely=0.525, anchor=N)
+        
+        login_btn = Button(p2, text="Log in", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",30), pady=50, width=20, height=1, command=p3.lift)
+        login_btn.place(relx=0.5, rely=0.525, anchor=N)
+        
+        ans_name = Button(p3, text="Verstuur!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",30), pady=50, width=20, height=1, command= p2.lift)
+        ans_name.place(relx=0.5, rely=0.525, anchor=N)
+        
+        p1.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+        p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+        p3.place(in_=container, x=0, y=0, relwidth=1, relheight=1)    
         p1.show()
   
 if __name__ == "__main__":  
