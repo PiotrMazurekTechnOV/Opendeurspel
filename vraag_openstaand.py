@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import *
 from PIL import ImageTk, Image
 import re
-
+from keyboard_new import KeyboardEntry
 
 class question():
     location = "ICT lokaal"
@@ -24,6 +24,7 @@ class Vraag(Pagina):
     def __init__(self, *args, **kwargs):
         Pagina.__init__(self, *args, **kwargs)
         qu = question()
+        entry_font = ("Gilroy Light", 45)
           
         #titel
         location_label = Label(self, text = qu.location, fg="#1b709d", font=("Gilroy Light", 65))
@@ -31,11 +32,12 @@ class Vraag(Pagina):
         
         vraag_label = Label(self, text ="Vraag: "+qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
         vraag_label.place(relx=0.5, rely=0.25, anchor=N)
-    
-        name_entry = Entry(self,textvariable = "ans", font=('calibre',10,'normal'))
-        name_entry.place(relx=0.5, rely=0.6, anchor=N)
-    
         
+        ans_name = Button(self, text="Verstuur!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",30), pady=50, width=20, height=1)
+        ans_name.place(relx=0.5, rely=0.525, anchor=N)
+          
+        naam_entry = KeyboardEntry(self, bd = 1, font=entry_font)
+        naam_entry.place(relx=0.5, rely=0.45, anchor=CENTER, height=85, width=1000)
         
 
 class MainView(Frame):
