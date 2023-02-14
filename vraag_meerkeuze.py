@@ -6,7 +6,8 @@ import re
 
 def SetUp(vraag, resultaten, antwoorden,klas):
 
-
+    global correct_answer
+    print(resultaten)
     if re.search(",",antwoorden) != None:
         answe = antwoorden.split(",")
 
@@ -16,11 +17,9 @@ def SetUp(vraag, resultaten, antwoorden,klas):
             correct_answer = correct_answers + {0}
     else:
         if resultaten == "1":
-            correct_answers = {1}
-            if len(answe) :
-                correct_answer = correct_answers + {0}
+            correct_answers = [1,0,0]
             if resultaten == "2":
-                correct_answers = {0,1}
+                correct_answers = {0,1,0}
                 if len(answe) :
                     correct_answer = correct_answers + {0}
             if resultaten == "3":
@@ -34,6 +33,8 @@ def SetUp(vraag, resultaten, antwoorden,klas):
             
             #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
         correct_answer = correct_answers
+        print(correct_answer)
+        
 
 
     ##############################################################################
@@ -70,12 +71,27 @@ def SetUp(vraag, resultaten, antwoorden,klas):
             global ans_name
             ans_name = [Button] * len(qu.answers)
             
+            #Submit button en checker als de resultaat van de speler. Speler nummer moet nog opgevraagd worden.
+            def buttonSubmit():
+                print("Click!")
+
             #answer check
             def checkanswer(x):
                 print(x)
                 selected_answers[x]= 1 if selected_answers[x]==0 else 0
 
                 print(selected_answers)
+                global checker
+
+                if selected_answers == correct_answer:
+                    print("Correrct!")
+                    checker = True
+                else:
+                    print("Niet Correct!")
+                    print(str(selected_answers)+str(correct_answer))
+                    checker = False
+
+
                 
             
             #button generation
@@ -90,7 +106,7 @@ def SetUp(vraag, resultaten, antwoorden,klas):
             vraag_label = Label(self, text ="Vraag: " + qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
             vraag_label.place(relx=0.5, rely=0.20, anchor=N)
         
-            submit_button = Button(self, text="Ga door!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1)
+            submit_button = Button(self, text="Ga door!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1,command=buttonSubmit)
             submit_button.place(relx=0.7, rely=0.8, anchor=N)
 
         
