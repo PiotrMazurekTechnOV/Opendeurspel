@@ -26,12 +26,22 @@ class Vraag(Pagina):
         #titel
         location_label = Label(self, text = qu.location, fg="#1b709d", font=("Gilroy Light", 65))
         location_label.place(relx=0.5, rely=0.1, anchor=N)
+
+        self.answers = [None] * len(qu.answers)
         
+        def button_activated(index: int):
+            print(self.answers[index])
+            if (self.answers[index]):
+                for button in self.answers:
+                  if (button):
+                       button.config(bg="#D5DF3A")
+                self.answers[index].config(bg="#1b709d")
+
         #button generation
         for x in range(0, len(qu.answers)):
-            ans_name = "b" + str(x)
-            ans_name = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1)
-            ans_name.place(relx=0.5, rely=rely_v, anchor=N)
+            self.answers[x] = Button(self, name=str(x),text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1, command=lambda x=x: button_activated(x))
+            self.answers[x].place(relx=0.5, rely=rely_v, anchor=N)
+            print(self.answers)
             rely_v = rely_v + 0.15
         
         vraag_label = Label(self, text ="Vraag: " + qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
