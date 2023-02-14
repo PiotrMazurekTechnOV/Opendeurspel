@@ -1,6 +1,7 @@
 from tkinter import * 
 from PIL import *
 from PIL import ImageTk, Image
+import tkinter
 import re
 
 def SetUp(vraag, resultaten, antwoorden,klas):
@@ -49,7 +50,7 @@ def SetUp(vraag, resultaten, antwoorden,klas):
         print(answe)
 
 
-##############################################################################
+    ##############################################################################
 
     class question():
         location = klas
@@ -75,19 +76,35 @@ def SetUp(vraag, resultaten, antwoorden,klas):
             #titel
             location_label = Label(self, text = qu.location, fg="#1b709d", font=("Gilroy Light", 65))
             location_label.place(relx=0.5, rely=0.1, anchor=N)
-        
+
+            global ans_name
+            global selectes_ans
+            selectes_ans = [0] * len(qu.answers)
+            
+            #answer check
+            def checkanswer():
+                global selected_answers
+                selected_answers = [None] * len(qu.answers)
+                for x in range(0, len(qu.answers)-1):
+                    selected_answers[x]= {
+                    ######################################################
+                    1 if selectes_ans[x] == 1 else 0,
+                    print(selectes_ans[x]),
+                    ######################################################
+                }
+            
             #button generation
-            for x in range(0, len(qu.answers)):
-                ans_name = "c" + str(x)
-                ans_name = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1)
-                ans_name.place(relx=0.5, rely=rely_v, anchor=N)
-                rely_v = rely_v + 0.15
-        
+            for x in range(0, len(qu.answers)-1):
+                ans_name[x] = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1,onvalue=1,offvalue=0,variable=selectes_ans[x],command=checkanswer())
+                ans_name[x].place(relx=0.5, rely=rely_v, anchor=N)
+                rely_v = rely_v + 0.15 
+
             vraag_label = Label(self, text ="Vraag: " + qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
             vraag_label.place(relx=0.5, rely=0.20, anchor=N)
         
             submit_button = Button(self, text="Ga door!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1)
             submit_button.place(relx=0.7, rely=0.8, anchor=N)
+
         
         
 

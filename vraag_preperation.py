@@ -35,14 +35,14 @@ def submit():  # Callback function for SUBMIT Button
     if vraagKeuze == 0:
             print("0")
             main.destroy()
-            vraag1_openVraag.SetUp(vraag,resultaten)
+           # vraag1_openVraag.SetUp(vraag,resultaten)
     elif vraagKeuze == 1:
             print("1")
             vraag_meerkeuze.SetUp(vraag,resultaten,antwoorden,klas)
     elif vraagKeuze == 2:
             print("2")
             main.destroy()
-            vraag3_choose.SetUp(vraag,resultaten,antwoorden)
+            #vraag3_choose.SetUp(vraag,resultaten,antwoorden)
             
 c = Canvas(main, width=width, height=height, highlightthickness=0)
 c.pack()
