@@ -3,10 +3,10 @@ import mysql.connector
 
 def connect_to_db():
     try:
-        mydb = mysql.connector.connect(  
-            host="sql7.freemysqlhosting.net",  
-            user= "sql7597227",  
-            password="7x9Ssuvhlq",  
+        mydb = mysql.connector.connect( 
+            host="sql7.freemysqlhosting.net",
+            user= "sql7597227",
+            password="7x9Ssuvhlq",
             database="sql7597227")
 
         cursor = mydb.cursor(buffered=True)
