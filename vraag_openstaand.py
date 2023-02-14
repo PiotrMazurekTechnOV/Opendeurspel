@@ -2,7 +2,7 @@ from tkinter import *
 from PIL import *
 from PIL import ImageTk, Image
 import re
-from keyboard_new import KeyboardEntry
+from keyboard_always_active import KeyboardEntry
 
 class question():
     location = "ICT lokaal"
@@ -35,7 +35,8 @@ class Vraag(Pagina):
         
         ans_name = Button(self, text="Verstuur!", bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",30), pady=50, width=20, height=1)
         ans_name.place(relx=0.5, rely=0.525, anchor=N)
-          
+        
+        
         naam_entry = KeyboardEntry(self, bd = 1, font=entry_font)
         naam_entry.place(relx=0.5, rely=0.45, anchor=CENTER, height=85, width=1000)
         
