@@ -163,6 +163,4 @@ text = '''
 '''
 file.write(text)
 file.close()
-
-
 root.mainloop()
