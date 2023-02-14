@@ -6,48 +6,34 @@ import re
 
 def SetUp(vraag, resultaten, antwoorden,klas):
 
+
+    if re.search(",",antwoorden) != None:
+        answe = antwoorden.split(",")
+
     if re.search(",",resultaten) != None:
-        resultaten.replace("1","a")
-        resultaten.replace("2","b")
-        resultaten.replace("3","c")
-        resultaten.replace("4","d")
-        if re.search("a",resultaten) == None:
-            resultaten = resultaten + ",na"
-        if re.search("b",resultaten) == None:
-            resultaten = resultaten + ",nb"
-        if re.search("c",resultaten) == None:
-            resultaten = resultaten + ",nc"
-        if re.search("d",resultaten) == None:
-            resultaten = resultaten + ",nd"
         correct_answers = resultaten.split(",")
-        correct_answers += None
-        correct_answer = correct_answers
-        print(correct_answer)
+        if len(answe) :
+            correct_answer = correct_answers + {0}
     else:
         if resultaten == "1":
-            correct_answers = {"a","nb","nc","nd",None}
-            correct_answer = correct_answers
-            print(correct_answer)
+            correct_answers = {1}
+            if len(answe) :
+                correct_answer = correct_answers + {0}
             if resultaten == "2":
-                correct_answers = {"na","b","nc","nd",None}
-                correct_answer = correct_answers
-                print(correct_answer)
+                correct_answers = {0,1}
+                if len(answe) :
+                    correct_answer = correct_answers + {0}
             if resultaten == "3":
-                correct_answers = {"na","nb","c","nd",None}
-                correct_answer = correct_answers
-                print(correct_answer)
+                correct_answers = {0,0,1}
+                if len(answe) :
+                    correct_answer = correct_answers + {0}
             if resultaten == "4":
-                correct_answers = {"na","nb","nc","d",None}
-                correct_answer = correct_answers
-                print(correct_answer)
+                correct_answers = {0,0,0,1}
+                if len(answe) :
+                    correct_answer = correct_answers + {0}
             
             #self.correct_answers = {"a", "b","c","nd",None}  -- oude code
         correct_answer = correct_answers
-
-
-        if re.search(",",antwoorden) != None:
-                answe = antwoorden.split(",")
-        print(answe)
 
 
     ##############################################################################
@@ -78,26 +64,28 @@ def SetUp(vraag, resultaten, antwoorden,klas):
             location_label.place(relx=0.5, rely=0.1, anchor=N)
 
             global ans_name
-            global selectes_ans
-            selectes_ans = [0] * len(qu.answers)
+            global selected_answers
+            selected_answers = [0] * len(qu.answers)
+            print(selected_answers)
+            global ans_name
+            ans_name = [Button] * len(qu.answers)
             
             #answer check
-            def checkanswer():
-                global selected_answers
-                selected_answers = [None] * len(qu.answers)
-                for x in range(0, len(qu.answers)-1):
-                    selected_answers[x]= {
-                    ######################################################
-                    1 if selectes_ans[x] == 1 else 0,
-                    print(selectes_ans[x]),
-                    ######################################################
-                }
+            def checkanswer(x):
+                print(x)
+                selected_answers[x]= 1 if selected_answers[x]==0 else 0
+
+                print(selected_answers)
+                
             
             #button generation
-            for x in range(0, len(qu.answers)-1):
-                ans_name[x] = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1,onvalue=1,offvalue=0,variable=selectes_ans[x],command=checkanswer())
+            for x in range(0, len(qu.answers)):
+                
+                ans_name[x] = Button(self, text=str(qu.answers[x]), bg="#D5DF3A", fg="#FFFFFF", activeforeground="#FFFFFF", activebackground="#1b709d", font=("gilroy light",15), pady=50, width=20, height=1,command=lambda x=x: checkanswer(x))
+               
                 ans_name[x].place(relx=0.5, rely=rely_v, anchor=N)
                 rely_v = rely_v + 0.15 
+                
 
             vraag_label = Label(self, text ="Vraag: " + qu.question, fg="#1b709d", font=("gilroy light",35), pady=50)
             vraag_label.place(relx=0.5, rely=0.20, anchor=N)
