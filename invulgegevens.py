@@ -196,11 +196,19 @@ class SuccesPage(Pagina):
         welkom.place(relx=0.5, rely=0.05, anchor=N)
 
         #uitleg
-        self.uitleg = Label(self, text = "Uw ID is: ", fg="#1b709d", font=("gilroy light", 24))
-        self.uitleg.place(relx=0.5, rely=0.15, anchor=N)
+        uitleg = Label(self, text = """Je bent succesvol geregistreerd. 
+
+        Hieronder staat je code om je bij de vragenschermen in te loggen:""", fg="#1b709d", font=("gilroy light", 40))
+        uitleg.place(relx=0.5, rely=0.25, anchor=N)
+
+        self.code = Label(self, text = "", fg="#1b709d", font=("gilroy light", 50))
+        self.code.place(relx=0.5, rely=0.5, anchor=N)
+
+        onthoud = Label(self, text = "Onthoud deze!", fg="#1b709d", font=("gilroy light", 40))
+        onthoud.place(relx=0.5, rely=0.62, anchor=N)
     
     def show_with_id(self, id):
-        self.uitleg.config(text="Uw ID is: " + id)
+        self.code.config(text=id)
         self.lift()
 
 class MainView(Frame):
