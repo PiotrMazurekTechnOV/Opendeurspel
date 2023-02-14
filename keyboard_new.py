@@ -15,7 +15,7 @@ class _PopupKeyboard(Toplevel):
         Toplevel.__init__(self, takefocus=0)
         
         self.overrideredirect(True)
-        self.attributes('-alpha',0.85)
+        self.attributes('-alpha',0.95)
 
         self.parent = parent
         self.attach = attach
@@ -36,7 +36,7 @@ class _PopupKeyboard(Toplevel):
         self.update_idletasks()
         self.geometry('{}x{}+{}+{}'.format(self.winfo_width(),
                                            self.winfo_height(),
-                                           int(self.winfo_width()/2) - (keysize * 11) - 40, self.winfo_height())) #+ int(keyheight/4)))
+                                           int(self.winfo_width()/2), int(self.winfo_height() * 3.5))) #+ int(keyheight/4)))
         
     def _init_keys(self):
         self.row1 = Frame(self)
