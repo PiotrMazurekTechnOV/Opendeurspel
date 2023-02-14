@@ -134,8 +134,8 @@ class _PopupKeyboard(Toplevel):
         self.alpha = {
             'row1' : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '←'],
             'row2' : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
-            'row3' : ['PREV','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T','NEXT'],
-            'row4' : ['↓', 'U', 'V', 'W', 'X', '␣', 'Y', 'Z', '.', '@', "❌"]
+            'row3' : ['','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',''],
+            'row4' : ['↓', 'U', 'V', 'W', 'X', '␣', 'Y', 'Z', '.', '@', ""]
             }
 
         for row in self.alpha: # iterate over dictionary of rows
@@ -199,13 +199,7 @@ class _PopupKeyboard(Toplevel):
                     i += 1
 
     def _attach_key_press(self, k):
-        if k == 'NEXT':
-            self.attach.tk_focusNext().focus_set()
-            self.destroy()
-        elif k == 'PREV':
-            self.attach.tk_focusPrev().focus_set()
-            self.destroy()
-        elif k == '←':
+        if k == '←':
             self.attach.delete(len(self.attach.get())-1, END)
         elif k == '␣':
             self.attach.insert(END, ' ')
