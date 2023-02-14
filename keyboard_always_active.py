@@ -198,9 +198,6 @@ class _PopupKeyboard(Toplevel):
                                command=lambda k=k: self._attach_key_press(k)).grid(row=0,column=i)
                     i += 1
 
-    def _destroy_popup(self):
-        self.destroy()
-
     def _attach_key_press(self, k):
         if k == 'NEXT':
             self.attach.tk_focusNext().focus_set()
@@ -277,12 +274,8 @@ class KeyboardEntry(Frame):
         self.keycolor = keycolor
         self.textcolor = textcolor
         
-        self.state = 'idle'
         
-        self.entry.bind('<FocusIn>', lambda e: self._check_state('focusin'))
-        self.entry.bind('<FocusOut>', lambda e: self._check_state('focusout'))
-        self.entry.bind('<Key>', lambda e: self._check_state('keypress'))
-        _PopupKeyboard(attach=self.entry,
+        self.kb = _PopupKeyboard(attach=self.entry,
                                  parent=self.parent,
                                  x=self.entry.winfo_rootx(),
                                  y=self.entry.winfo_rooty() + self.entry.winfo_reqheight(),
@@ -290,11 +283,12 @@ class KeyboardEntry(Frame):
                                  textcolor=self.textcolor,
                                  keycolor=self.keycolor)
 
+    
 
 def test():  
     root = Tk()
     KeyboardEntry(root, keysize=6, keycolor='white').pack()
-    KeyboardEntry(root).pack()
+#KeyboardEntry(root).pack()
     root.mainloop()
 
 if __name__ == '__main__':
