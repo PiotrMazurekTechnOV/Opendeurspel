@@ -12,8 +12,9 @@ class _PopupKeyboard(Toplevel):
     '''
     
     def __init__(self, parent, attach, x, y, keycolor, textcolor, keysize=2, keyheight=1, font=('Arial', 20)):
-        Toplevel.__init__(self, takefocus=0)
-        
+        Toplevel.__init__(self, takefocus=1)
+        self.attributes('-topmost', 'true')
+        #self.focus_force()
         self.overrideredirect(True)
         self.attributes('-alpha',0.95)
 
@@ -49,8 +50,8 @@ class _PopupKeyboard(Toplevel):
         self.alpha = {
             'row1' : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '←'],
             'row2' : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'],
-            'row3' : ['PREV','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't','NEXT'],
-            'row4' : ['↑','u', 'v', 'w', 'x', '␣', 'y', 'z', '.', '@', "❌"]
+            'row3' : ['','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',''],
+            'row4' : ['↑','u', 'v', 'w', 'x', '␣', 'y', 'z', '.', '@', ""]
             }
         
         for row in self.alpha: # iterate over dictionary of rows
