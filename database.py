@@ -26,10 +26,13 @@ def _execute_query(query: str):
             mydb.commit()
             cursor.close()
             mydb.close()
+            return "Succes"
         else:
             print("connection failed")
+            return "Connectie mislukt, probeer opnieuw."
     except mysql.connector.Error as error:
         print(error)
+        return "Probeer opnieuw, " + str(error)
 
 def _execute_select(query: str, many = False):
     try:
@@ -58,10 +61,10 @@ def _generate_user_id(name, last_name):
         codeId += 1
     return user_id + str(codeId)
 
-def insert_user(name: str, last_name: str, email_address: str, email_child: str, age_child: int, direction: str, contact: bool, phone_number: int):
+def insert_user(name: str, last_name: str, email_address: str, age_child: int, direction: str, contact: bool, phone_number: int):
     user_id = _generate_user_id(name, last_name)
-    _execute_query(
-        f'INSERT INTO users (name, last_name, email_address, email_child, age_child, direction, contact, phone_number, user_id) VALUES ("{name}", "{last_name}", "{email_address}", "{email_child}", {age_child}, "{direction}", {contact}, {phone_number}, "{user_id}")')
+    return _execute_query(
+        f'INSERT INTO users (name, last_name, email_address, age_child, direction, contact, phone_number, user_id) VALUES ("{name}", "{last_name}", "{email_address}", {age_child}, "{direction}", {contact}, {phone_number}, "{user_id}")') + " for user: "+user_id
 
 def select_user_by_user_id(user_id: str):
     user = _execute_select(f'SELECT * FROM users WHERE user_id = "{user_id}"')
@@ -133,4 +136,4 @@ def select_result_amount_for(user_id: str):
 
 if __name__ == '__main__':
     #_execute_query("DELETE FROM answers")
-    pass
+    print(select_all_questions())

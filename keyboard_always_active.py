@@ -12,8 +12,9 @@ class _PopupKeyboard(Toplevel):
     '''
     
     def __init__(self, parent, attach, x, y, keycolor, textcolor, keysize=2, keyheight=1, font=('Arial', 20)):
-        Toplevel.__init__(self, takefocus=0)
-        
+        Toplevel.__init__(self, takefocus=1)
+        self.attributes('-topmost', 'true')
+        #self.focus_force()
         self.overrideredirect(True)
         self.attributes('-alpha',0.95)
 
@@ -28,9 +29,6 @@ class _PopupKeyboard(Toplevel):
         self.y = y
         
         self._init_keys()
-
-        # destroy _PopupKeyboard on keyboard interrupt
-        self.bind('<Key>', lambda e: self._destroy_popup())
 
         # resize to fit keys
         self.update_idletasks()
@@ -52,8 +50,8 @@ class _PopupKeyboard(Toplevel):
         self.alpha = {
             'row1' : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '←'],
             'row2' : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'],
-            'row3' : ['PREV','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't','NEXT'],
-            'row4' : ['↑','u', 'v', 'w', 'x', '␣', 'y', 'z', '.', '@', "❌"]
+            'row3' : ['','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',''],
+            'row4' : ['↑','u', 'v', 'w', 'x', '␣', 'y', 'z', '.', '@', ""]
             }
         
         for row in self.alpha: # iterate over dictionary of rows
@@ -137,8 +135,8 @@ class _PopupKeyboard(Toplevel):
         self.alpha = {
             'row1' : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '←'],
             'row2' : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
-            'row3' : ['PREV','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T','NEXT'],
-            'row4' : ['↓', 'U', 'V', 'W', 'X', '␣', 'Y', 'Z', '.', '@', "❌"]
+            'row3' : ['','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',''],
+            'row4' : ['↓', 'U', 'V', 'W', 'X', '␣', 'Y', 'Z', '.', '@', ""]
             }
 
         for row in self.alpha: # iterate over dictionary of rows
@@ -201,17 +199,8 @@ class _PopupKeyboard(Toplevel):
                                command=lambda k=k: self._attach_key_press(k)).grid(row=0,column=i)
                     i += 1
 
-    def _destroy_popup(self):
-        self.destroy()
-
     def _attach_key_press(self, k):
-        if k == 'NEXT':
-            self.attach.tk_focusNext().focus_set()
-            self.destroy()
-        elif k == 'PREV':
-            self.attach.tk_focusPrev().focus_set()
-            self.destroy()
-        elif k == '←':
+        if k == '←':
             self.attach.delete(len(self.attach.get())-1, END)
         elif k == '␣':
             self.attach.insert(END, ' ')
@@ -280,30 +269,7 @@ class KeyboardEntry(Frame):
         self.keycolor = keycolor
         self.textcolor = textcolor
         
-        self.state = 'idle'
         
-        self.entry.bind('<FocusIn>', lambda e: self._check_state('focusin'))
-        self.entry.bind('<FocusOut>', lambda e: self._check_state('focusout'))
-        self.entry.bind('<Key>', lambda e: self._check_state('keypress'))
-
-    def _check_state(self, event):
-        '''finite state machine'''
-        if self.state == 'idle':
-            if event == 'focusin':
-                self._call_popup()
-                self.state = 'virtualkeyboard'
-        elif self.state == 'virtualkeyboard':
-            if event == 'focusin':
-                self._destroy_popup()
-                self.state = 'typing'
-            elif event == 'keypress':
-                self._destroy_popup()
-                self.state = 'typing'
-        elif self.state == 'typing':
-            if event == 'focusout':
-                self.state = 'idle'
-        
-    def _call_popup(self):
         self.kb = _PopupKeyboard(attach=self.entry,
                                  parent=self.parent,
                                  x=self.entry.winfo_rootx(),
@@ -312,13 +278,12 @@ class KeyboardEntry(Frame):
                                  textcolor=self.textcolor,
                                  keycolor=self.keycolor)
 
-    def _destroy_popup(self):
-        self.kb._destroy_popup()
+    
 
 def test():  
     root = Tk()
     KeyboardEntry(root, keysize=6, keycolor='white').pack()
-    KeyboardEntry(root).pack()
+#KeyboardEntry(root).pack()
     root.mainloop()
 
 if __name__ == '__main__':
