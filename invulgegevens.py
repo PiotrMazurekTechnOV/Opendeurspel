@@ -16,7 +16,9 @@ from keyboard_new import KeyboardEntry
 #e-mail requirements
 email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
-studie_richting_opties = ["a", "b", "c"]
+studie_richting_opties = ["1A STEM-WETENSCHAPPEN", "1A STEM-TECHNIEKEN", "1B STEM-TECHNIEKEN", "2A STEM-WETENSCHAPPEN", "2A STEM-TECHNIEKEN", "2B STEM-TECHNIEKEN",
+                          "Technologische wetenschappen", "Elektrotechnieken", "Mechanische technieken", "Elektriciteit", "Hout", "Mechanica", "Technologische wetenschappen en engineering", 
+                          "Elektrotechnieken", "Industriele ICT", "Mechanische Vormgevings Technieken", "Binnenschrijnwerk en interieur", "Elektrische instalaties", "Fiets instalaties", "Lassenconstructie", "Onderhoudsmechanica Auto"]
     
 
 class Pagina(Frame):
@@ -136,13 +138,14 @@ class GegevensPagina(Pagina):
         email_ouders_entry.place(relx=oXE, rely=oYES + oY * 2, anchor=CENTER, height=height, width=entry_width)
 
         def change_contact_box():
-            contact_allowed_var.set(not contact_allowed_var.get())
-            contact_box.config(text="✅ Wilt u door ons gecontacteerd worden?" if contact_allowed_var.get() else "❌ Wilt u door ons gecontacteerd worden?")
+            contact_allowed.set(not contact_allowed.get())
+            contact_box.config(text="✅ Wilt u door ons gecontacteerd worden?" if contact_allowed.get() else "❌ Wilt u door ons gecontacteerd worden?")
 
-        contact_allowed_var = BooleanVar(value=False)
-        contact_box = Button(self, text="  Wilt u door ons gecontacteerd worden?", font=("", 15), command=change_contact_box)
-        change_contact_box();
+        contact_allowed = BooleanVar(value=False)
+        contact_box = Button(self, text="✅ Wilt u door ons gecontacteerd worden?", font=("", 15), command=change_contact_box)
         contact_box.place(relx=0.5, rely=0.8, anchor=CENTER)
+        self.contact_box = contact_box
+
 
         #cntctbox.bind('<<ListBoxSelect>>', okbutton)
         self.naam_entry = naam_entry.entry
@@ -150,8 +153,9 @@ class GegevensPagina(Pagina):
         self.leeftijd_entry = leeftijd_entry.entry
         self.tel_entry = tel_entry.entry
         self.email_entry = email_ouders_entry.entry
-        self.contact_allowed = contact_allowed_var
         self.studierichting = studierighting
+        self.contact_allowed = contact_allowed
+
 
     def gegevens_ingevuld(self):
         global adressin, numm, eoudin
@@ -187,6 +191,16 @@ class GegevensPagina(Pagina):
             return (True, result.split(" for user: ")[1])
         self.error.config(text=result)
         return False
+    
+    def clearInputFields(self):
+        self.naam_entry.delete(0, END)
+        self.achternaam_entry.delete(0, END)
+        self.leeftijd_entry.delete(0, END)
+        self.tel_entry.delete(0, END)
+        self.email_entry.delete(0, END)
+        self.contact_allowed.set(True)
+        self.contact_box.config(text="✅ Wilt u door ons gecontacteerd worden?")
+        self.studierichting.set("In welke richting bent u geïnteresseerd?")
    
 
 class SuccesPage(Pagina):
@@ -230,6 +244,7 @@ class MainView(Frame):
             if (result and result[0]):
                 p3.show_with_id(result[1])
             print(result[1])
+            p2.clearInputFields()
 
         b1 = Button(p1, text=" Start! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 30), relief= FLAT , command=p2.lift, activeforeground="#FFFFFF", activebackground="#1b709d")        
         b2 = Button(p2, text=" Klaar! ", bg="#D5DF3A", fg="#FFFFFF", font=("Gilroy", 20), relief= FLAT , command=klaar, activeforeground="#FFFFFF", activebackground="#1b709d")  

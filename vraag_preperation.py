@@ -1,5 +1,5 @@
 #import vraag1_openVraag
-import vraag_meerkeuze
+import vraag_keuze as vraag_keuze
 #import vraag3_choose
 from tkinter import *
 import database as db
@@ -38,7 +38,7 @@ def submit():  # Callback function for SUBMIT Button
            # vraag1_openVraag.SetUp(vraag,resultaten)
     elif vraagKeuze == 1:
             print("1")
-            vraag_meerkeuze.SetUp(vraag,resultaten,antwoorden,klas)
+            vraag_keuze.SetUp(vraag,resultaten,antwoorden,klas)
     elif vraagKeuze == 2:
             print("2")
             main.destroy()

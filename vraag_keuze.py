@@ -184,6 +184,7 @@ class MainView(Frame):
             if type(score) != int:
                 score = score[0] / score[1]
             database.insert_result(p3.id, p3.location, score)
+            messagebox.showinfo("Gelukt", "Je antwoord is verzonden")
             p3.clear_buttons()
             p2.lift()
 

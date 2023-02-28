@@ -3,10 +3,6 @@ import mysql.connector
 def connect_to_db():
     try:
         mydb = mysql.connector.connect(
-            #host="192.168.125.2",
-            #user="opendeur",
-            #password ="opendeur",
-            #database ="opendeurspel",
             host="127.0.0.1",
             user="root",
             password ="root",
