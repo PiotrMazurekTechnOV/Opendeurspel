@@ -25,9 +25,9 @@ class VragenPagina(Pagina):
         welkom.place(relx=0.45, rely=0.035, anchor=N)
 
         def creer_nieuwe_vraag():
-            type = QuestionType.OPEN_VRAAG.value
-            if (antwoord2.get() == "" and antwoord3.get() == "" and antwoord4.get() == ""):
-                type = QuestionType.OPEN_VRAAG.value
+            #type = QuestionType.OPEN_VRAAG.value
+            #if (antwoord2.get() == "" and antwoord3.get() == "" and antwoord4.get() == ""):
+            #    type = QuestionType.OPEN_VRAAG.value
             
             correcte_answers_string = ""
             if check1.get():
@@ -38,15 +38,18 @@ class VragenPagina(Pagina):
                 correcte_answers_string += "3,"
             if check4.get():
                 correcte_answers_string += "4,"
-            if (len(correcte_answers_string) > 2):
-                type = QuestionType.MULTIPLE_CHOICE.value
-            else:
-                type = QuestionType.PICK_ONE.value
+            #if (len(correcte_answers_string) > 2):
+            #    type = QuestionType.MULTIPLE_CHOICE.value
+            #else:
+            #    type = QuestionType.PICK_ONE.value
             antwoorden = ",".join([antwoord1.get(), antwoord2.get(), antwoord3.get(), antwoord4.get()])
-            database.change_question_with_answer(vraag_naam.get(), vraag_entry.get(), type, antwoorden, correcte_answers_string)
+            print(antwoorden)
+            database.change_question_with_answer(vraag_naam.get(), vraag_entry.get(), antwoorden, correcte_answers_string)
 
         def vraag_selecteer(vraag):
             print(vraag)
+            if (not vraag):
+                return
             question = database.select_question(vraag)
             answers = database.select_answer(vraag)
             print(answers)
@@ -122,12 +125,12 @@ class VragenPagina(Pagina):
             menu = selecteer_vraag["menu"]
             menu.delete(0, "end")
             questions = database.select_all_questions()
-            question_names = [question[3] for question in questions]
+            question_names = [question[2] for question in questions]
             for string in question_names:
                 menu.add_command(label=string, command=lambda value=string: vraag_selecteer(value))
 
         questions = database.select_all_questions()
-        question_names = [question[3] for question in questions]
+        question_names = [question[2] for question in questions]
 
         if (len(question_names) == 0):
             question_names = ["Geen vragen gevonden"]
