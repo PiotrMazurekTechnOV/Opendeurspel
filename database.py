@@ -3,11 +3,10 @@ import mysql.connector
 def connect_to_db():
     try:
         mydb = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            password ="root",
-            database ="database_opendeurdag",
-            auth_plugin='mysql_native_password'
+            host="191.168.155.9",
+            user="opendeur",
+            password ="opendeur",
+            database ="opendeurspel"
             )
     
         cursor = mydb.cursor(buffered=True)
